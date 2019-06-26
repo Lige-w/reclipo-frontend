@@ -1,3 +1,3 @@
-# ReCliPO Frontend
+# RePrO Frontend
 
 This is the React Frontend  for ReCliPO: Resource Client for Project Organization
