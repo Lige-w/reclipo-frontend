@@ -10,6 +10,7 @@ import {requestAuth} from "./redux/actions/userActions";
 import RegisterContainer from './containers/RegisterContainer'
 import LoginContainer from './containers/LoginContainer'
 import UserProfile from './containers/UserProfile'
+import NotFound from './components/NotFound'
 
 const RePrO = ({user, requestAuth}) => {
     const [isLoading, setIsLoading] = useState(true)
