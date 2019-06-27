@@ -1,25 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import {Route, Switch, Redirect} from 'react-router-dom'
+import {Route, Switch, Redirect, withRouter} from 'react-router-dom'
 import {connect} from "react-redux";
 
 import './App.css';
 
-import {token, authFetch} from './helpers/fetch'
+import {token} from './helpers/fetch'
+import {requestAuth} from "./redux/actions/userActions";
 
 import RegisterContainer from './containers/RegisterContainer'
 import LoginContainer from './containers/LoginContainer'
 import UserProfile from './containers/UserProfile'
 
-const RePrO = ({user}) => {
-
+const RePrO = ({user, requestAuth}) => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         if (token()) {
-            authFetch().then(user => {
-                console.log(user)
-                setIsLoading(false)
-            })
+            requestAuth(setIsLoading)
         } else {
             setIsLoading(false)
         }
@@ -45,6 +42,11 @@ const RePrO = ({user}) => {
                 <RegisterContainer />
         )
     )
+
+    const showProfile = () => isLoading ? null : (
+        user ? <UserProfile/> : <Redirect to="/login" />
+    )
+
     return (
         <div className="repro">
             <Switch>
@@ -52,11 +54,11 @@ const RePrO = ({user}) => {
                     <Route exact path='/' render={redirectHome} />
                     <Route exact path='/login' render={showLogin} />
                     <Route exact path='/register' render={showRegister} />
-                {user ? <Route exact path={`/${user.username}`} component={UserProfile}/> : null}
+                {user ? <Route exact path={`/${user.username}`} render={showProfile}/> : null}
                 </div>
             </Switch>
         </div>
     );
 }
 
-export default connect(state => ({ user: state.user }))(RePrO);
+export default withRouter(connect(state => ({ user: state.user }), {requestAuth})(RePrO));

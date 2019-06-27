@@ -16,14 +16,14 @@ const postFetch = (url, body) => (
         .then(resp => resp.json())
 )
 
-const authFetch = () => (
-    fetch(AUTH_URL, {
+const authFetch = () => {
+    return fetch(AUTH_URL, {
         headers: {
-            "Authentication" : `Bearer ${token}`
+            "Authentication": `Bearer ${token()}`
         }
     })
         .then(resp => resp.json())
-)
+}
 
 export {
     LOGIN_URL,
