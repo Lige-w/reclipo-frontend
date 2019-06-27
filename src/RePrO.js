@@ -7,10 +7,10 @@ import './App.css';
 import {token} from './helpers/fetch'
 import {requestAuth} from "./redux/actions/userActions";
 
-import RegisterContainer from './containers/RegisterContainer'
-import LoginContainer from './containers/LoginContainer'
-import UserProfile from './containers/UserProfile'
-import NotFound from './components/NotFound'
+import RegisterContainer from './containers/home/RegisterContainer'
+import LoginContainer from './containers/home/LoginContainer'
+import UserProfile from './containers/profile/UserProfile'
+import NotFound from './components/home/NotFound'
 
 const RePrO = ({user, requestAuth}) => {
     const [isLoading, setIsLoading] = useState(true)

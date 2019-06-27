@@ -1,0 +1,22 @@
+#user-profile {
+    display: grid;
+    grid-template-columns: 20vw 80vw;
+    height: 100vh;
+}
+
+#projects-controller {
+    background: rgb(51,51,51);
+    background: #444444;
+    border-right: 1px solid;
+}
+
+#resources-container {
+    display: grid;
+    grid-template-rows: 5vh 95vh
+}
+
+#resources-controller {
+    background: #3E3E3E;
+    border-bottom: 1px solid #6A6A6A;
+}
+

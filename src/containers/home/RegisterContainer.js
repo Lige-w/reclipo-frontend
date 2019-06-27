@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-import RegisterForm from '../components/RegisterForm'
+import RegisterForm from '../../components/home/RegisterForm'
 import {Link} from "react-router-dom";
 
 const RegisterContainer = () => {

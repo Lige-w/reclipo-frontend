@@ -3,7 +3,7 @@ import {Form, Button} from 'semantic-ui-react'
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
-import {requestLogin} from "../redux/actions/userActions";
+import {requestLogin} from "../../redux/actions/userActions";
 
 const LoginForm = ({requestLogin}) => {
     const [username, setUsername] = useState('')

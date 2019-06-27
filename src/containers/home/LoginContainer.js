@@ -1,8 +1,8 @@
 import React from 'react'
 
 
-import LoginForm from '../components/LoginForm'
-import '../styles/login.css'
+import LoginForm from '../../components/home/LoginForm'
+import '../../styles/login.css'
 import {Link} from "react-router-dom";
 
 const LoginContainer = () => {

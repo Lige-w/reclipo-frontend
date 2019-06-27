@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Form, Button} from 'semantic-ui-react'
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {registerUser} from "../redux/actions/userActions";
+import {registerUser} from "../../redux/actions/userActions";
 
 const RegisterForm = ({registerUser}) => {
     const [username, setUsername] = useState('')
