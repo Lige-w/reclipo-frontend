@@ -1,0 +1,15 @@
+#login-container, #register-container {
+    background: #F5F5EE;
+    height: 100vh;
+    width: 50vw;
+    padding: 50px
+}
+
+#login-form-container {
+    margin-bottom: 10px;
+}
+
+
+.full-width-button {
+    width: 100%;
+}
