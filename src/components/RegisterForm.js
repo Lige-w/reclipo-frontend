@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {registerUser} from "../redux/actions/userActions";
 
-const RegisterForm = () => {
+const RegisterForm = ({registerUser}) => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -12,11 +12,9 @@ const RegisterForm = () => {
 
     const handleSubmit = () => {
         if (password === confirmPassword) {
-            registerUser({username, email, password})
+            registerUser({user: {username, email, password}})
         }
     }
-
-    console.log(username)
 
     return (
         <div id='login-form-container'>
@@ -63,4 +61,5 @@ const RegisterForm = () => {
     )
 }
 
-export default connect(null, registerUser)(RegisterForm)
+
+export default connect(null, {registerUser})(RegisterForm)

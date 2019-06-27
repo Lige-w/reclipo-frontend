@@ -1,9 +1,13 @@
 .home-background {
-    background-image: url("https://cdn.pixabay.com/photo/2017/03/20/10/50/books-2158737_960_720.jpg");
     background-size: cover;
     background-position: center;
     width: 100vw;
     height: 100vh;
+    background-color: #FCECC6
+}
+
+.home-background.login{
+    background-image: url("https://cdn.pixabay.com/photo/2017/03/20/10/50/books-2158737_960_720.jpg");
     background-color: #FCECC6
 }
 

@@ -16,8 +16,8 @@ const postFetch = (url, body) => (
         .then(resp => resp.json())
 )
 
-const authFetch = (url) => (
-    fetch(url, {
+const authFetch = () => (
+    fetch(AUTH_URL, {
         headers: {
             "Authentication" : `Bearer ${token}`
         }
