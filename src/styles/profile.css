@@ -1,18 +1,24 @@
 #user-profile {
     display: grid;
-    grid-template-columns: 20vw 80vw;
+    grid-template-columns: 240px auto;
+    grid-template-rows: 85vh 15vh;
     height: 100vh;
 }
 
 #projects-controller {
     background: rgb(51,51,51);
     background: #444444;
-    border-right: 1px solid;
+    color: #D5D5D5;
+    border-right: 1px solid #000000;
+    padding: 10px;
 }
 
 #resources-container {
+    grid-row: 1 / 3;
+    grid-column: 2 / 3;
     display: grid;
-    grid-template-rows: 5vh 95vh
+    grid-template-rows: 5vh 95vh;
+    background: #F1F1F1;
 }
 
 #resources-controller {
@@ -20,3 +26,7 @@
     border-bottom: 1px solid #6A6A6A;
 }
 
+#user-controller {
+    border-top: 1px solid #666666;
+    background-color: #444444;
+}
