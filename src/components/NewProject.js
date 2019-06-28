@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
-
+import {connect} from "react-redux";
 import {Modal, Header, Icon, Form, Input, TextArea, Button} from "semantic-ui-react";
+import {requestCreateProject} from "../redux/actions/projectActions";
+
 
 const NewProject = () => {
 
@@ -8,7 +10,7 @@ const NewProject = () => {
     const [description, setDescription] = useState('')
 
     const createProject = () => {
-
+        requestCreateProject({user: {title, description}})
     }
 
     return (
@@ -38,4 +40,4 @@ const NewProject = () => {
     )
 }
 
-export default NewProject
+export default connect(null, {requestCreateProject})(NewProject)
