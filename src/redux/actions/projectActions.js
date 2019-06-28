@@ -26,7 +26,7 @@ const addProject = (project) => {
 
 const requestProjectDetails = (id) => {
     return dispatch => {
-        return authGetFetch(`${PROJECTS_URL}/id`)
+        return authGetFetch(`${PROJECTS_URL}/${id}`)
             .then(console.log)
     }
 }
