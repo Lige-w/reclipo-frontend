@@ -1,8 +1,9 @@
 import {
     postFetch,
-    authFetch,
+    authGetFetch,
     USERS_URL,
-    LOGIN_URL
+    LOGIN_URL,
+    AUTH_URL
 } from "../../helpers/fetch";
 
 
@@ -15,7 +16,7 @@ const registerUser = (body) => (
 
 const requestAuth = (setIsLoading) => {
     return dispatch => {
-        authFetch().then(user => {
+        authGetFetch(AUTH_URL).then(user => {
             setIsLoading(false)
             dispatch(login(user))
         })

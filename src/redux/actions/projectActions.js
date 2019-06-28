@@ -1,4 +1,4 @@
-import {PROJECTS_URL, authPostFetch} from "../../helpers/fetch";
+import {PROJECTS_URL, authPostFetch, authGetFetch} from "../../helpers/fetch";
 
 const requestCreateProject = (body) => {
     return dispatch => {
@@ -9,8 +9,19 @@ const requestCreateProject = (body) => {
     }
 }
 
+const requestUserProjects = () => {
+    return dispatch => {
+        return authGetFetch(PROJECTS_URL)
+            .then(projects => dispatch(fetchedProjects(projects)))
+    }
+}
+
+const fetchedProjects = (projects) => {
+    return {type: 'FETCHED_PROJECTS', projects}
+}
+
 const addProject = (project) => {
     return {type: 'ADD_Project', project}
 }
 
-export {requestCreateProject}
+export {requestCreateProject, requestUserProjects}

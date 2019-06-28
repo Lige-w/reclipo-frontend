@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {connect} from "react-redux";
 import {Modal, Header, Icon, Form, Input, TextArea, Button} from "semantic-ui-react";
-import {requestCreateProject} from "../redux/actions/projectActions";
+import {requestCreateProject} from "../../redux/actions/projectActions";
 
 
 const NewProject = ({requestCreateProject}) => {
