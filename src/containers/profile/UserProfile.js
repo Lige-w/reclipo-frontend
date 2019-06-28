@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 
 import ProjectsController from './ProjectsController'
-import ResourcesContainer from './ResourcesContainer'
+import ResourcesContainer from './resource-container/ResourcesContainer'
 import UserController from './UserController'
 
 import '../../styles/profile.css'

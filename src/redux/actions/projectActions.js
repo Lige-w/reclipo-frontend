@@ -21,7 +21,14 @@ const fetchedProjects = (projects) => {
 }
 
 const addProject = (project) => {
-    return {type: 'ADD_Project', project}
+    return {type: 'ADD_PROJECT', project}
 }
 
-export {requestCreateProject, requestUserProjects}
+const requestProjectDetails = (id) => {
+    return dispatch => {
+        return authGetFetch(`${PROJECTS_URL}/id`)
+            .then(console.log)
+    }
+}
+
+export {requestCreateProject, requestUserProjects, requestProjectDetails}

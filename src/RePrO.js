@@ -55,7 +55,7 @@ const RePrO = ({user, requestAuth}) => {
                     <Route exact path='/' render={redirectHome} />
                     <Route exact path='/login' render={showLogin} />
                     <Route exact path='/register' render={showRegister} />
-                {user ? <Route exact path={`/${user.username}`} render={showProfile}/> : null}
+                {user ? <Route path={`/${user.username}`} render={showProfile}/> : null}
                 </div>
             </Switch>
         </div>
