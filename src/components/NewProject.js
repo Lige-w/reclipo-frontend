@@ -4,13 +4,13 @@ import {Modal, Header, Icon, Form, Input, TextArea, Button} from "semantic-ui-re
 import {requestCreateProject} from "../redux/actions/projectActions";
 
 
-const NewProject = () => {
+const NewProject = ({requestCreateProject}) => {
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
 
     const createProject = () => {
-        requestCreateProject({user: {title, description}})
+        requestCreateProject({project: {title, description}})
     }
 
     return (

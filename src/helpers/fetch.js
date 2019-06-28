@@ -28,6 +28,7 @@ const authFetch = () => {
 
 const authPostFetch = (url, body) => {
     return fetch(url, {
+        method: 'POST',
         headers: {
             "Content-Type" :"application/json",
             "Accept" :"application/json",
