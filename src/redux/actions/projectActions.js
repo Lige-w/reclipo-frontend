@@ -1,12 +1,14 @@
 import {PROJECTS_URL, authPostFetch} from "../../helpers/fetch";
 
-const requestCreateProject = (body) => {
-    authPostFetch(PROJECTS_URL, body)
-        .then(addProject)
-}
+const requestCreateProject = (body) => (
+    dispatch => (
+        authPostFetch(PROJECTS_URL, body)
+        .then(project => dispatch(addProject(project)))
+    )
+)
 
-const addProject = () => {
-
+const addProject = (project) => {
+    debugger
 }
 
 export {requestCreateProject}
