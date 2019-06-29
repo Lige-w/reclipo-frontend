@@ -1,11 +1,15 @@
 import React from 'react'
+import {Icon} from "semantic-ui-react";
 
-const ResourcesController = () => {
+const ReferencesController = ({setIsShowingRefForm, isShowingRefForm}) => {
+
     return (
         <div id="resources-controller">
-            <NewReference></NewReference>
+            <span onClick={() => setIsShowingRefForm(!isShowingRefForm)}>
+                <Icon name='file'/> Add a reference
+            </span>
         </div>
     )
 }
 
-export default ResourcesController
+export default ReferencesController

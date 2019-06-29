@@ -1,9 +1,9 @@
 import React from 'react'
 
-const UserResources = () => {
+const UserReferences = () => {
     return (
         <div className='resources'>user</div>
     )
 }
 
-export default UserResources
+export default UserReferences

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import {connect} from "react-redux";
 import {requestProjectDetails} from "../../../redux/actions/projectActions";
 
-const ProjectResources = ({match, requestProjectDetails}) => {
+const ProjectReferences = ({match, requestProjectDetails}) => {
     const id = match.params.id.split('_')[0]
 
     useEffect(() => {requestProjectDetails(id)}, [])
@@ -12,4 +12,4 @@ const ProjectResources = ({match, requestProjectDetails}) => {
     )
 }
 
-export default connect(null, {requestProjectDetails})(ProjectResources)
+export default connect(null, {requestProjectDetails})(ProjectReferences)

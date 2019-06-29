@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 
 import ProjectsController from './ProjectsController'
-import ResourcesContainer from './resource-container/ResourcesContainer'
+import ReferencesContainer from './reference-container/ReferencesContainer'
 import UserController from './UserController'
 
 import '../../styles/profile.css'
@@ -11,7 +11,7 @@ import '../../styles/profile.css'
 const UserProfile = ({user}) => {
     return (
         <div id='user-profile'>
-            <ResourcesContainer/>
+            <ReferencesContainer/>
             <ProjectsController/>
             <UserController/>
         </div>
