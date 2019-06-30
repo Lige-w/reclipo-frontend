@@ -16,7 +16,8 @@ const onlineReferenceMedia = [
     'Journal',
     'Newspaper',
     'Audio',
-    'Video'
+    'Video',
+    'E-Book'
 ]
 
 const otherReferenceMedia = [
