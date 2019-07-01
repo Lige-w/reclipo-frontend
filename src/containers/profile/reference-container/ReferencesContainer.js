@@ -14,8 +14,7 @@ const ReferencesContainer = () => {
                 isShowingRefForm={isShowingRefForm}
                 setIsShowingRefForm={setIsShowingRefForm}
             />
-            {isShowingRefForm ? <NewReference setIsShowingRefForm={setIsShowingRefForm}/> : <ReferencesView/>}
-
+            <ReferencesView isShowingRefForm={isShowingRefForm} setIsShowingRefForm={setIsShowingRefForm}/>}
         </div>
     )
 }
