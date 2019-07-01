@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 
-import ResourcesConroller from './ReferencesController'
+import ReferencesConroller from './ReferencesController'
 import ReferencesView from './ReferencesView'
-import NewReference from "./NewReference"
+import NewReference from './NewReference'
 
 const ReferencesContainer = () => {
 
@@ -10,10 +10,11 @@ const ReferencesContainer = () => {
 
     return (
         <div id="resources-container">
-            <ResourcesConroller
+            <ReferencesConroller
                 isShowingRefForm={isShowingRefForm}
                 setIsShowingRefForm={setIsShowingRefForm}
             />
+            {isShowingRefForm ? <NewReference setIsShowingRefForm={setIsShowingRefForm}/> :
             <ReferencesView isShowingRefForm={isShowingRefForm} setIsShowingRefForm={setIsShowingRefForm}/>}
         </div>
     )

@@ -5,12 +5,13 @@ import UserReferences from './UserReferences'
 import ProjectReferences from './ProjectReferences'
 import NewReference from "./ReferencesContainer";
 
+import '../../../styles/references.css'
+
 const ReferencesView = ({user: {username}, isShowingRefForm, setIsShowingRefForm}) => {
 
     return (
         <div id="resources-view">
             <Switch>
-                {isShowingRefForm ? <NewReference setIsShowingRefForm={setIsShowingRefForm}/> : null}
                 <Route exact path={`/${username}`} component={UserReferences}/>
                 <Route exact path={`/${username}/:id`} component={ProjectReferences}/>
             </Switch>
