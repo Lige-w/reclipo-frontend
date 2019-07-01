@@ -16,6 +16,16 @@ const requestUserProjects = () => {
     }
 }
 
+const requestProjectDetails = (id) => {
+    return dispatch => {
+        return authGetFetch(`${PROJECTS_URL}/${id}`)
+            .then(project => {
+                debugger
+                return dispatch(setCurrentProject(project))
+            })
+    }
+}
+
 const fetchedProjects = (projects) => {
     return {type: 'FETCHED_PROJECTS', projects}
 }
@@ -24,11 +34,9 @@ const addProject = (project) => {
     return {type: 'ADD_PROJECT', project}
 }
 
-const requestProjectDetails = (id) => {
-    return dispatch => {
-        return authGetFetch(`${PROJECTS_URL}/${id}`)
-            .then(console.log)
-    }
+const setCurrentProject = project => {
+    return {type: 'SET_CURRENT_PROJECT', project}
 }
 
-export {requestCreateProject, requestUserProjects, requestProjectDetails}
+
+export {requestCreateProject, requestUserProjects, requestProjectDetails, setCurrentProject}

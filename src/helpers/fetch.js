@@ -2,6 +2,8 @@ const LOGIN_URL = 'http://localhost:3000/api/v1/login'
 const AUTH_URL = 'http://localhost:3000/api/v1/profile'
 const USERS_URL = 'http://localhost:3000/api/v1/users'
 const PROJECTS_URL = 'http://localhost:3000/api/v1/projects'
+const REFERENCES_URL = 'http://localhost:3000/api/v1/references'
+
 
 const token = () => localStorage.getItem('token')
 
@@ -45,6 +47,7 @@ export {
     AUTH_URL,
     USERS_URL,
     PROJECTS_URL,
+    REFERENCES_URL,
     postFetch,
     authGetFetch,
     authPostFetch,

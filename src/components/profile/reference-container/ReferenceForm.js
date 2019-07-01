@@ -1,15 +1,16 @@
 import React, {useState, useEffect} from 'react'
-import {Form, Select, Input, Button} from "semantic-ui-react";
+import {Form, Select, Input, Button, Dropdown} from "semantic-ui-react";
+import {connect} from "react-redux";
 import {
     referenceTypes,
     printReferenceMedia,
     otherReferenceMedia,
     onlineReferenceMedia
 } from '../../../helpers/referenceHelper'
-
+import {requestCreateReference} from "../../../redux/actions/referenceActions";
 import AuthorFields from './AuthorFields'
 
-const ReferenceForm = () => {
+const ReferenceForm = ({requestCreateReference, projectId}) => {
 
     const [type, setType] = useState(referenceTypes[0])
     const [medium, setMedium] = useState(null)
@@ -25,6 +26,7 @@ const ReferenceForm = () => {
     const [pageNumbers, setPageNumbers] = useState('')
     const [volumeNumber, setVolumeNumber] = useState('')
     const [issueNumber, setIssueNumber] = useState('')
+    const [tags, setTags] = useState('')
 
     const mediaForSelectedType = () => {
         switch(type) {
@@ -54,21 +56,33 @@ const ReferenceForm = () => {
         }
     }
 
-    useEffect(() => {setMedium(mediaForSelectedType()[0])}, [type])
+    useEffect(() => {
+        if(!mediaForSelectedType().includes(medium))setMedium(mediaForSelectedType()[0])
+    }, [type])
 
     const createReference = () => {
+        const tags_attributes = tags.split(/,\s*/).map(tag => ({name: tag}))
+        const authors_attributes = authorsAttributes.map(({lastName, firstName, middleInitial}) => (
+            {last_name: lastName, first_name: firstName, middle_initial: middleInitial}
+            ))
+
         const body = {
-            type,
+            reference_type: type,
             medium,
-            number_of_authors: numberOfAuthors,
-            authors_attributes: authorsAttributes,
+            authors_attributes,
             title,
-            date_published: datePublished,
+            publish_date: datePublished,
             publisher_location: publisherLocation,
             publisher,
             url,
-            page_numbers: pageNumbers
+            page_numbers: pageNumbers,
+            volume_number: volumeNumber,
+            issue_number: issueNumber,
+            tags_attributes,
+            project_id: projectId
         }
+        console.log(body)
+        requestCreateReference(body)
     }
 
     const changeNumberOfAuthors = (e, {value}) => {
@@ -173,10 +187,22 @@ const ReferenceForm = () => {
                     placeholder='Page Numbers'
                     onChange={(e,{value}) => setPageNumbers(value)}/>
                 : null}
-
+            {['Journal', 'Magazine', 'Newspaper'].includes(medium) ?
+                <Form.Group>
+                    <Form.Field control={Input} label='Volume Number' placeholder='Volume Number'  onChange={(e,{value}) => setVolumeNumber(value)}/>
+                    <Form.Field control={Input} label='Issue Number' placeholder='Issue Number' onChange={(e,{value}) => setIssueNumber(value)}/>
+                </Form.Group>
+                : null}
+                <Form.Field
+                    control={Input}
+                    label='Tags'
+                    placeholder='Enter any tags for this reference separated by commas (",")'
+                    onChange={(e, {value}) => setTags(value)}
+                    value={tags}
+                />
             <Button type='submit'>Create Reference</Button>
         </Form>
     )
 }
 
-export default ReferenceForm
+export default connect(state => ({projectId: state.currentProject.id}), {requestCreateReference})(ReferenceForm)
