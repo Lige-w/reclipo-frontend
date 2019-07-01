@@ -20,7 +20,6 @@ const requestProjectDetails = (id) => {
     return dispatch => {
         return authGetFetch(`${PROJECTS_URL}/${id}`)
             .then(project => {
-                debugger
                 return dispatch(setCurrentProject(project))
             })
     }

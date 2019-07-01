@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Form, Select, Input, Button, Dropdown} from "semantic-ui-react";
+import {Form, Select, Input, Button} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {
     referenceTypes,
@@ -10,7 +10,7 @@ import {
 import {requestCreateReference} from "../../../redux/actions/referenceActions";
 import AuthorFields from './AuthorFields'
 
-const ReferenceForm = ({requestCreateReference, projectId}) => {
+const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm}) => {
 
     const [type, setType] = useState(referenceTypes[0])
     const [medium, setMedium] = useState(null)
@@ -81,8 +81,8 @@ const ReferenceForm = ({requestCreateReference, projectId}) => {
             tags_attributes,
             project_id: projectId
         }
-        console.log(body)
         requestCreateReference(body)
+        setIsShowingRefForm(false)
     }
 
     const changeNumberOfAuthors = (e, {value}) => {
