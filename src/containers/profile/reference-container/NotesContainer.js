@@ -4,6 +4,8 @@ import {Icon, Tab, Dropdown} from "semantic-ui-react";
 
 import {requestCreateNote} from "../../../redux/actions/noteActions";
 
+import NoteEditor from "../../../components/profile/reference-container/NoteEditor"
+
 const NotesContainer = ({notes, referenceId, requestCreateNote}) => {
 
     const [isShowingNotes, setIsShowingNotes] = useState(false)
@@ -28,18 +30,21 @@ const NotesContainer = ({notes, referenceId, requestCreateNote}) => {
 
     const notePanes = notes.length < 6 ?
         notes.map((note , i)=> (
-            {menuItem: note.name || `Note ${i + 1}`, render: () => <Tab.Pane>THis is a Note</Tab.Pane>}
+            {menuItem: note.name || `Note ${i + 1}`, render: () => <Tab.Pane key={note.id}><NoteEditor note={note} /></Tab.Pane>}
         ))
         :
         [{menuItem: <Dropdown
+                key={`dropdown-${referenceId}`}
                 scrolling
                 item
                 className='note-dropdown'
                 text={notes[selectedNoteIndex].name || `Note ${selectedNoteIndex + 1}`}
                 value={selectedNoteIndex}
                 onChange={(e, {value}) => setSelectedNoteIndex(value)}
-                options={noteOptions} />,
-            render: () => <Tab.Pane>This is Note: {notes[selectedNoteIndex].id}</Tab.Pane>}]
+                options={noteOptions}
+            />,
+            render: () => <Tab.Pane><NoteEditor note={notes[selectedNoteIndex]}/></Tab.Pane>}]
+
     return (
         <Fragment>
             <div className='new-note' onClick={createNote}><Icon name='add'/> <strong>Add Note</strong></div>
