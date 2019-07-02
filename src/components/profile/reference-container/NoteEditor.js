@@ -5,15 +5,26 @@ class NoteEditor extends Component {
     constructor(props) {
         super(props)
 
-        const {note: {content}} = props
+
 
         this.state = {
             editorState: EditorState.createEmpty()
         }
     }
 
+    componentDidMount() {
+        if (this.props.content) {
+            const editorContent = convertFromRaw(JSON.parse(this.props.content))
+            this.setState({
+                editorState: EditorState.createWithContent(editorContent)
+            })
+        }
+    }
+
     onChange = (editorState) => {
+
         this.setState({editorState})
+
     }
 
     render() {
