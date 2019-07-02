@@ -1,8 +1,11 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from "react-redux";
-import {Button, Icon} from "semantic-ui-react";
+import {Button, Icon, Tab} from "semantic-ui-react";
 
-const Reference = ({reference: {
+import NotesContainer from '../../../containers/profile/reference-container/NotesContainer'
+
+
+const Reference = ({requestCreateNote, reference: {
     id,
     title,
     publisher,
@@ -15,12 +18,11 @@ const Reference = ({reference: {
     volume_number: volumeNumber,
     issue_number: issueNumber,
     tags,
-    authors
+    authors,
+    notes
 }}) => {
 
-    const createNote = (id) => {
-        requestCreateNote(id)
-    }
+
 
     const authorElements = authors.map(({id, first_name, last_name, middle_initial}, i) => {
         if (i === 0) {
@@ -40,15 +42,16 @@ const Reference = ({reference: {
 
 
 
+
     return (
         <div className='reference'>
             <div className="reference-header">{medium} <span className="float-right"><strong>Tags: </strong>{tagsElement}</span></div>
             <div className="reference-details">
                 {authorElements}({publishDate.split('-')[0]}) <em>{title}</em>. {publisherLocation}: {publisher}
             </div>
-            <div className='new-note' onClick={createNote}><Icon name='add'/> <strong>Add Note</strong></div>
+            <NotesContainer referenceId={id} notes={notes}/>
         </div>
     )
 }
 
-export default connect()(Reference)
+export default Reference

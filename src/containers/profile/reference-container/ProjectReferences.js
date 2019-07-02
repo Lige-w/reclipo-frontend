@@ -11,6 +11,7 @@ const ProjectReferences = ({match, requestProjectDetails, currentProject}) => {
 
     useEffect(() => {requestProjectDetails(id)}, [match])
     useEffect(() => {
+        console.log(references)
        if(!!currentProject) {setReferences(currentProject.references)}
     }, [currentProject])
 

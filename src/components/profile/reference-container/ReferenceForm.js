@@ -86,7 +86,7 @@ const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm})
     }
 
     const changeNumberOfAuthors = (e, {value}) => {
-        const intValue = parseInt(value)
+        const  intValue = parseInt(value) >= 0 ? parseInt(value) : 0
 
         if (numberOfAuthors > intValue) {
             setAuthorsAttributes(authorsAttributes.slice(0, intValue))
@@ -142,7 +142,7 @@ const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm})
                     label={`Number of ${creatorType()}s`}
                     placeholder={`Number of ${creatorType()}s`}
                     value={numberOfAuthors}
-                    min='1'
+                    min='0'
                     type='number'
                 />
             </Form.Group>

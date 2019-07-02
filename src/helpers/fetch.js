@@ -49,6 +49,7 @@ export {
     USERS_URL,
     PROJECTS_URL,
     REFERENCES_URL,
+    NOTES_URL,
     postFetch,
     authGetFetch,
     authPostFetch,
