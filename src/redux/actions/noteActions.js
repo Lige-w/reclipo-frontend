@@ -11,5 +11,9 @@ const addNoteToReference = (note) => ({
     type: "ADD_NOTE_TO_REFERENCE", note
 })
 
-export {requestCreateNote}
+const updateNoteContent = (note) => ({
+    type: 'UPDATE_NOTE_CONTENT', note
+})
+
+export {requestCreateNote, updateNoteContent}
 
