@@ -3,6 +3,7 @@ const AUTH_URL = 'http://localhost:3000/api/v1/profile'
 const USERS_URL = 'http://localhost:3000/api/v1/users'
 const PROJECTS_URL = 'http://localhost:3000/api/v1/projects'
 const REFERENCES_URL = 'http://localhost:3000/api/v1/references'
+const NOTES_URL = 'http://localhost:3000/api/v1/notes'
 
 
 const token = () => localStorage.getItem('token')

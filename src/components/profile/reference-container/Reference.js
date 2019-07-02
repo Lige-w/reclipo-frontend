@@ -1,6 +1,9 @@
 import React from 'react'
+import {connect} from "react-redux";
+import {Button, Icon} from "semantic-ui-react";
 
 const Reference = ({reference: {
+    id,
     title,
     publisher,
     publisher_location: publisherLocation,
@@ -12,14 +15,17 @@ const Reference = ({reference: {
     volume_number: volumeNumber,
     issue_number: issueNumber,
     tags,
-    authors,
-
+    authors
 }}) => {
+
+    const createNote = (id) => {
+        requestCreateNote(id)
+    }
 
     const authorElements = authors.map(({id, first_name, last_name, middle_initial}, i) => {
         if (i === 0) {
             return <span key={id}>{last_name}, {first_name ? `${first_name[0]}. ` : null}{middle_initial ? `${middle_initial}.` : null}</span>
-        } else if (id === authors.pop().id) {
+        } else if (i === authors.length - 1) {
             return <span key={id}> & {last_name}, {first_name ? `${first_name[0]}. ` : null}{middle_initial ? `${middle_initial}.` : null}</span>
         } else if (i > 6) {
             return null
@@ -28,19 +34,21 @@ const Reference = ({reference: {
         } else {
             return <span key={id}>, {last_name}, {first_name ? `${first_name[0]}. ` : null}{middle_initial ? `${middle_initial}.` : null}</span>
         }
-
     })
 
     const tagsElement = tags.map(tag => tag.name).join(' ')
+
+
 
     return (
         <div className='reference'>
             <div className="reference-header">{medium} <span className="float-right"><strong>Tags: </strong>{tagsElement}</span></div>
             <div className="reference-details">
-                {authorElements}({publishDate.split('-')[0]}) <em>{title}</em>. {publisherLocation} {publisher}
+                {authorElements}({publishDate.split('-')[0]}) <em>{title}</em>. {publisherLocation}: {publisher}
             </div>
+            <div className='new-note' onClick={createNote}><Icon name='add'/> <strong>Add Note</strong></div>
         </div>
     )
 }
 
-export default Reference
+export default connect()(Reference)

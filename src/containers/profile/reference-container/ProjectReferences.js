@@ -9,7 +9,7 @@ const ProjectReferences = ({match, requestProjectDetails, currentProject}) => {
 
     const [references, setReferences] = useState([])
 
-    useEffect(() => {requestProjectDetails(id)}, [])
+    useEffect(() => {requestProjectDetails(id)}, [match])
     useEffect(() => {
        if(!!currentProject) {setReferences(currentProject.references)}
     }, [currentProject])
