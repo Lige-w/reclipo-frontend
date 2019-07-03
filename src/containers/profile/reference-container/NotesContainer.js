@@ -43,7 +43,9 @@ const NotesContainer = ({notes, referenceId, requestCreateNote}) => {
                 onChange={(e, {value}) => setSelectedNoteIndex(value)}
                 options={noteOptions}
             />,
-            render: () => <Tab.Pane><NoteEditor note={notes[selectedNoteIndex]}/></Tab.Pane>}]
+            render: () => <Tab.Pane>
+                <NoteEditor note={notes[selectedNoteIndex]}/>
+        </Tab.Pane>}]
 
     return (
         <Fragment>

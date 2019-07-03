@@ -1,9 +1,11 @@
-const LOGIN_URL = 'http://localhost:3000/api/v1/login'
-const AUTH_URL = 'http://localhost:3000/api/v1/profile'
-const USERS_URL = 'http://localhost:3000/api/v1/users'
-const PROJECTS_URL = 'http://localhost:3000/api/v1/projects'
-const REFERENCES_URL = 'http://localhost:3000/api/v1/references'
-const NOTES_URL = 'http://localhost:3000/api/v1/notes'
+URL = 'http://localhost:3000/api/v1/'
+
+const LOGIN_URL = URL + 'login/'
+const AUTH_URL = URL + 'profile/'
+const USERS_URL = URL + 'users/'
+const PROJECTS_URL = URL + 'projects/'
+const REFERENCES_URL = URL + 'references/'
+const NOTES_URL = URL + 'notes/'
 
 
 const token = () => localStorage.getItem('token')
@@ -43,6 +45,23 @@ const authPostFetch = (url, body) => {
 }
 
 
+const authPatchFetch = (url, body) => {
+    return fetch(url, {
+        method: 'PATCH',
+        headers: {
+            "Content-Type" :"application/json",
+            "Accept" :"application/json",
+            "Authentication": `Bearer ${token()}`
+        },
+        body: JSON.stringify(body)
+    })
+        // .then(resp => resp.json())
+}
+
+
+
+
+
 export {
     LOGIN_URL,
     AUTH_URL,
@@ -53,5 +72,6 @@ export {
     postFetch,
     authGetFetch,
     authPostFetch,
+    authPatchFetch,
     token
 }

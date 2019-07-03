@@ -14,21 +14,27 @@
     padding: 10px;
 }
 
+#resources-view {
+    overflow-y: scroll;
+}
+
 #resources-container {
+    grid-auto-rows: min-content;
     grid-row: 1 / 3;
     grid-column: 2 / 3;
     display: grid;
-    grid-template-rows: 5vh 95vh;
     background: #F1F1F1;
 }
 
 #resources-controller {
     background: #3E3E3E;
     border-bottom: 1px solid #6A6A6A;
+    color: #D5D5D5;
 }
 
 #user-controller {
     border-top: 1px solid #666666;
     background-color: #444444;
+    color: #D5D5D5;
 }
 

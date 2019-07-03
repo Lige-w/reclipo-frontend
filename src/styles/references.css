@@ -15,3 +15,16 @@ div.note-dropdown.ui.scrolling.dropdown {
     border-right: solid 1px #CECECE;
     border-radius: 4px 4px 0 0;
 }
+
+div.ui.bottom.attached.segment.active.tab {
+    padding: 0;
+}
+
+.editor-toolbar {
+    background: #BBBBBB;
+    padding: 0 5px;
+}
+
+.DraftEditor-editorContainer {
+    padding: 20px;
+}
