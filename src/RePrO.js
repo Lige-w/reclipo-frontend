@@ -61,4 +61,4 @@ const RePrO = ({user, requestAuth}) => {
     );
 }
 
-export default withRouter(connect(state => ({ user: state.user }), {requestAuth})(RePrO));
+export default connect(state => ({ user: state.user }), {requestAuth})(RePrO);

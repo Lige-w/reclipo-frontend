@@ -4,6 +4,9 @@ const userReducer = (state = null, action) => {
         case 'LOGIN':
             if(action.user.jwt){localStorage.setItem('token', action.user.jwt)}
             if (action.user.user){return action.user.user}
+        case 'LOGOUT':
+            localStorage.removeItem('token')
+            return null
         default:
             return state
     }

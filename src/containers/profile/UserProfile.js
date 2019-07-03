@@ -8,17 +8,15 @@ import UserController from './UserController'
 
 import '../../styles/profile.css'
 
-const UserProfile = ({currentProject}) => {
+const UserProfile = () => {
+
     return (
         <div id='user-profile'>
             <ProjectsController/>
-            {currentProject ?
-                <ReferencesContainer/> :
-                <div id='resourcesContainer'>Please select a project</div>
-            }
+            <ReferencesContainer/>
             <UserController/>
         </div>
     )
 }
 
-export default connect(state => ({currentProject: state.currentProject}))(UserProfile)
+export default UserProfile

@@ -8,15 +8,21 @@ const NewProject = ({requestCreateProject}) => {
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
+    const [isModalShowing, setIsModalShowing] = useState(false)
+
 
     const createProject = () => {
-        requestCreateProject({project: {title, description}})
+        requestCreateProject({project: {title, description}}, setIsModalShowing)
     }
 
     return (
         <Modal
-            trigger={<div><Icon name='add'/> <strong>New Project</strong></div>}
             closeIcon
+            onClose={() => setIsModalShowing(false)}
+            open={isModalShowing}
+            trigger={
+                <div onClick={()=>setIsModalShowing(true)}><Icon name='add'/> <strong>New Project</strong></div>
+            }
         >
             <Header icon='add' content={'New Project'}/>
             <Modal.Content>

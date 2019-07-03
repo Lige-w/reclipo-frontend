@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import {Icon} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 
+import DeleteProjectModal from './DeleteProjectModal'
+
 const OpenProject =  ({project: {id, title, description}, username}) => {
     return (
         <div>
@@ -10,6 +12,7 @@ const OpenProject =  ({project: {id, title, description}, username}) => {
                 <Icon name='folder'/>
                 <strong> {title}</strong>
             </Link>
+            <DeleteProjectModal title={title} id={id}/>
         </div>
     )
 }

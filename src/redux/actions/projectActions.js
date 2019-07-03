@@ -1,11 +1,19 @@
-import {PROJECTS_URL, authPostFetch, authGetFetch} from "../../helpers/fetch";
+import {PROJECTS_URL, authPostFetch, authGetFetch, authDeleteFetch} from "../../helpers/fetch";
 
-const requestCreateProject = (body) => {
+const requestCreateProject = (body, setIsModalShowing) => {
     return dispatch => {
         return authPostFetch(PROJECTS_URL, body)
             .then(project => {
+                setIsModalShowing(false)
                 dispatch(addProject(project))
+                dispatch(setCurrentProject(project))
             })
+    }
+}
+
+const requestDeleteProject = (id) => {
+    return dispatch => {
+        return authDeleteFetch(PROJECTS_URL + id)
     }
 }
 
@@ -18,7 +26,7 @@ const requestUserProjects = () => {
 
 const requestProjectDetails = (id) => {
     return dispatch => {
-        return authGetFetch(`${PROJECTS_URL}/${id}`)
+        return authGetFetch(`${PROJECTS_URL}${id}`)
             .then(project => {
                 return dispatch(setCurrentProject(project))
             })
@@ -38,4 +46,10 @@ const setCurrentProject = project => {
 }
 
 
-export {requestCreateProject, requestUserProjects, requestProjectDetails, setCurrentProject}
+export {
+    requestCreateProject,
+    requestUserProjects,
+    requestProjectDetails,
+    setCurrentProject,
+    requestDeleteProject
+}

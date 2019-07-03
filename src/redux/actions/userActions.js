@@ -30,9 +30,8 @@ const requestLogin = (body) => {
     }
 }
 
-
-
 const login = (user) => ({type: 'LOGIN', user })
 
+const logout = () => ({type: 'LOGOUT'})
 
-export {registerUser, requestAuth, requestLogin}
+export {registerUser, requestAuth, requestLogin, logout}

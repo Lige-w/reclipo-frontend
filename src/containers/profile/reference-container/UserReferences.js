@@ -2,7 +2,7 @@ import React from 'react'
 
 const UserReferences = () => {
     return (
-        <div className='resources'>user</div>
+        <div className='resources'>Please Select a Project</div>
     )
 }
 
