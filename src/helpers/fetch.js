@@ -59,7 +59,7 @@ const authPatchFetch = (url, body) => {
 }
 
 const authDeleteFetch = (url) => {
-    fetch(url, {
+    return fetch(url, {
         method: 'DELETE',
         headers: {
             "Authentication": `Bearer ${token()}`,
@@ -67,7 +67,7 @@ const authDeleteFetch = (url) => {
             "Accept" :"application/json",
         }
     })
-        .then(resp => resp.json)
+        .then(resp => resp.json())
 }
 
 

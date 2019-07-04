@@ -11,12 +11,6 @@ const requestCreateProject = (body, setIsModalShowing) => {
     }
 }
 
-const requestDeleteProject = (id) => {
-    return dispatch => {
-        return authDeleteFetch(PROJECTS_URL + id)
-    }
-}
-
 const requestUserProjects = () => {
     return dispatch => {
         return authGetFetch(PROJECTS_URL)
@@ -33,6 +27,16 @@ const requestProjectDetails = (id) => {
     }
 }
 
+const requestDeleteProject = (id) => {
+    return dispatch => {
+        return authDeleteFetch(PROJECTS_URL + id)
+            .then(projects => {
+                dispatch(fetchedProjects(projects))
+                dispatch(unsetCurrentProject(id))
+            })
+    }
+}
+
 const fetchedProjects = (projects) => {
     return {type: 'FETCHED_PROJECTS', projects}
 }
@@ -44,6 +48,12 @@ const addProject = (project) => {
 const setCurrentProject = project => {
     return {type: 'SET_CURRENT_PROJECT', project}
 }
+
+const unsetCurrentProject = id => {
+    return {type: 'UNSET_CURRENT_PROJECT', id}
+}
+
+const deleteProject = (id) => ({type: 'DELETE_PROJECT', id})
 
 
 export {

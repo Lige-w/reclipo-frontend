@@ -5,7 +5,6 @@ const requestCreateReference = (body) => {
     return dispatch => {
         return authPostFetch(REFERENCES_URL, body)
             .then(project => {
-                console.log(project)
                 return dispatch(setCurrentProject(project))
             })
     }

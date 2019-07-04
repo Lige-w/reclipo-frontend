@@ -66,7 +66,7 @@ const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm})
             {last_name: lastName, first_name: firstName, middle_initial: middleInitial}
             ))
 
-        const body = {
+        const body = {reference: {
             reference_type: type,
             medium,
             authors_attributes,
@@ -79,8 +79,8 @@ const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm})
             volume_number: volumeNumber,
             issue_number: issueNumber,
             tags_attributes,
-            project_id: projectId
-        }
+            project_ids: [projectId]
+        }}
         requestCreateReference(body)
         setIsShowingRefForm(false)
     }
