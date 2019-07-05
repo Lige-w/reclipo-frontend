@@ -27,6 +27,11 @@ const referencesReducer = (state=[], action) => {
         case 'DELETE_REFERENCE': {
             return state.filter(reference => reference.id !== action.id)
         }
+        case 'DELETE_NOTE':
+            const stateCopy = [...state]
+            const reference = stateCopy.find(reference => reference.id === action.note.reference_id)
+            reference.notes = reference.notes.filter(note => note.id !== action.note.id)
+            return stateCopy
         default:
             return state
     }
