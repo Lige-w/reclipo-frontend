@@ -1,5 +1,7 @@
 import React from 'react'
 import {Icon} from "semantic-ui-react";
+import {connect} from "react-redux";
+import {setIsShowingRefForm} from "../../../redux/actions/referenceActions";
 
 const ReferencesController = ({setIsShowingRefForm, isShowingRefForm}) => {
 
@@ -12,4 +14,4 @@ const ReferencesController = ({setIsShowingRefForm, isShowingRefForm}) => {
     )
 }
 
-export default ReferencesController
+export default connect(state => ({isShowingRefForm: state.isShowingRefForm}), {setIsShowingRefForm})(ReferencesController)

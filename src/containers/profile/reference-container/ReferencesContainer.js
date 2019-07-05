@@ -1,23 +1,22 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 import ReferencesController from './ReferencesController'
 import ReferencesView from './ReferencesView'
 import ReferenceForm from '../../../components/profile/reference-container/ReferenceForm'
+import {connect} from "react-redux";
 
-const ReferencesContainer = () => {
+const ReferencesContainer = ({isShowingRefForm}) => {
 
-    const [isShowingRefForm, setIsShowingRefForm] = useState(false)
+
 
     return (
         <div id="resources-container">
             <ReferencesController
-                isShowingRefForm={isShowingRefForm}
-                setIsShowingRefForm={setIsShowingRefForm}
             />
-            {isShowingRefForm ? <ReferenceForm setIsShowingRefForm={setIsShowingRefForm}/> :
-            <ReferencesView isShowingRefForm={isShowingRefForm} setIsShowingRefForm={setIsShowingRefForm}/>}
+            {isShowingRefForm ? <ReferenceForm/> :
+            <ReferencesView />}
         </div>
     )
 }
 
-export default ReferencesContainer
+export default connect(state =>({isShowingRefForm: state.isShowingRefForm}))(ReferencesContainer)

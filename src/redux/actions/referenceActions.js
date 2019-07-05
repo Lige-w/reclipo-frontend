@@ -17,6 +17,10 @@ const requestDeleteReference = (id) => {
     }
 }
 
+const setIsShowingRefForm = (boolean) => ({
+    type: 'SET_IS_SHOWING_REF_FORM', boolean
+})
+
 const deleteReference = (id) => ({type: "DELETE_REFERENCE", id})
 
-export {requestCreateReference, requestDeleteReference}
+export {requestCreateReference, requestDeleteReference, setIsShowingRefForm}

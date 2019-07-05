@@ -7,7 +7,7 @@ import NewReference from "./ReferencesContainer";
 
 import '../../../styles/references.css'
 
-const ReferencesView = ({user: {username}, isShowingRefForm, setIsShowingRefForm}) => {
+const ReferencesView = ({user: {username}}) => {
 
     return (
         <div id="resources-view">

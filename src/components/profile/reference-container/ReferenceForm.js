@@ -7,7 +7,9 @@ import {
     otherReferenceMedia,
     onlineReferenceMedia
 } from '../../../helpers/referenceHelper'
+
 import {requestCreateReference} from "../../../redux/actions/referenceActions";
+import {setIsShowingRefForm} from "../../../redux/actions/referenceActions";
 import AuthorFields from './AuthorFields'
 
 const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm}) => {
@@ -116,7 +118,8 @@ const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm})
     ))
 
     return(
-        <Form onSubmit={createReference}>
+        <div id='reference-form'>
+        <Form  onSubmit={createReference}>
             <Form.Group>
                 <Form.Field
                     control={Select}
@@ -202,7 +205,11 @@ const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm})
                 />
             <Button type='submit'>Create Reference</Button>
         </Form>
+        </div>
     )
 }
 
-export default connect(state => ({projectId: state.currentProject.id}), {requestCreateReference})(ReferenceForm)
+export default connect(
+    state => ({projectId: state.currentProject.id}),
+    {requestCreateReference, setIsShowingRefForm}
+    )(ReferenceForm)
