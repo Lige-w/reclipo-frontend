@@ -1,5 +1,12 @@
-import {authPostFetch, authDeleteFetch, authPatchFetch, REFERENCES_URL} from "../../helpers/fetch";
+import {authGetFetch ,authPostFetch, authDeleteFetch, authPatchFetch, REFERENCES_URL} from "../../helpers/fetch";
 import {setCurrentProject} from "./projectActions";
+
+const requestGetUserReferences = () => {
+    return dispatch => {
+        return authGetFetch(REFERENCES_URL)
+            .then(references => dispatch(setUserReferences(references)))
+    }
+}
 
 const requestCreateReference = (body) => {
     return dispatch => {
@@ -27,6 +34,10 @@ const requestDeleteReference = (id) => {
     }
 }
 
+const setUserReferences = (references) => ({
+    type: 'SET_USER_REFERENCES', references
+})
+
 const setIsShowingRefForm = (boolean) => ({
     type: 'SET_IS_SHOWING_REF_FORM', boolean
 })
@@ -38,4 +49,4 @@ const setRefToEdit = (reference) => ({
 
 const deleteReference = (id) => ({type: "DELETE_REFERENCE", id})
 
-export {requestCreateReference, requestEditReference, requestDeleteReference, setIsShowingRefForm, setRefToEdit}
+export {requestGetUserReferences, requestCreateReference, requestEditReference, requestDeleteReference, setIsShowingRefForm, setRefToEdit}

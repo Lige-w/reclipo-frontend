@@ -1,5 +1,5 @@
 import React from 'react'
-import {Route, Switch} from "react-router-dom";
+import {Route, Switch, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import UserReferences from './UserReferences'
 import ProjectReferences from './ProjectReferences'
@@ -19,4 +19,4 @@ const ReferencesView = ({user: {username}}) => {
     )
 }
 
-export default connect(state => ({user: state.user}))(ReferencesView)
+export default withRouter(connect(state => ({user: state.user}))(ReferencesView))

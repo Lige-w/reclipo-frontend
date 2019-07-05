@@ -5,6 +5,7 @@ import {requestProjectDetails} from "../../../redux/actions/projectActions";
 import Reference from "../../../components/profile/reference-container/Reference"
 
 const ProjectReferences = ({match, requestProjectDetails, currentProject}) => {
+    debugger
     const id = match.params.id.split('_')[0]
 
     const [references, setReferences] = useState([])
@@ -17,6 +18,7 @@ const ProjectReferences = ({match, requestProjectDetails, currentProject}) => {
     const referenceComponents = references.map(reference => (
         <Reference key={reference.id} reference={reference} />
     ))
+
     return (
         <div className='resources'>
             {referenceComponents}
