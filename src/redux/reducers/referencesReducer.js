@@ -15,6 +15,18 @@ const referencesReducer = (state=[], action) => {
             note.content = action.note.content
             return stateCopy
         }
+        case 'ADD_REFERENCE': {
+            return [...state, action.reference]
+        }
+        case 'UPDATE_REFERENCE': {
+            const stateCopy = [...state]
+            const referenceIndex = stateCopy.findIndex(reference => reference.id === action.reference.id)
+            stateCopy.splice(referenceIndex, 1, action.reference)
+            return stateCopy
+        }
+        case 'DELETE_REFERENCE': {
+            return state.filter(reference => reference.id !== action.id)
+        }
         default:
             return state
     }

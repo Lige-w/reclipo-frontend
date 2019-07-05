@@ -5,12 +5,6 @@ const currentProjectReducer = (state = null, action) => {
         case 'UNSET_CURRENT_PROJECT':
             if (state.id === action.id) {return null}
             else {return state}
-        case 'DELETE_REFERENCE':
-            const referencesCopy = [...state.references]
-            const referenceIndex = referencesCopy.findIndex(reference => reference.id === action.id)
-            referencesCopy.splice(referenceIndex, 1)
-            state.references = referencesCopy
-            return {...state}
         case 'DELETE_NOTE':
             const stateCopy = {...state}
             const copyOfReferences = [...stateCopy.references]

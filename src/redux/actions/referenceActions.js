@@ -11,8 +11,8 @@ const requestGetUserReferences = () => {
 const requestCreateReference = (body) => {
     return dispatch => {
         return authPostFetch(REFERENCES_URL, body)
-            .then(project => {
-                return dispatch(setCurrentProject(project))
+            .then(reference => {
+                return dispatch(addReference(reference))
             })
     }
 }
@@ -20,9 +20,9 @@ const requestCreateReference = (body) => {
 const requestEditReference = (body) => {
     return dispatch => {
         return authPatchFetch(REFERENCES_URL + body.reference.id, body)
-            .then(project => {
+            .then(reference => {
                 setRefToEdit(null)
-                return dispatch(setCurrentProject(project))
+                return dispatch(updateReference(reference))
             })
     }
 }
@@ -46,6 +46,13 @@ const setRefToEdit = (reference) => ({
     type: 'SET_REF_TO_EDIT', reference
 })
 
+const addReference = (reference) => ({
+    type: 'ADD_REFERENCE', reference
+})
+
+const updateReference = reference => ({
+    type: 'UPDATE_REFERENCE', reference
+})
 
 const deleteReference = (id) => ({type: "DELETE_REFERENCE", id})
 
