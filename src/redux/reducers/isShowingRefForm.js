@@ -1,4 +1,4 @@
-const refFormReducer = (state = false, action) => {
+const isShowingRefForm = (state = false, action) => {
     switch(action.type) {
         case 'SET_IS_SHOWING_REF_FORM':
             return action.boolean
@@ -7,4 +7,4 @@ const refFormReducer = (state = false, action) => {
     }
 }
 
-export {refFormReducer}
+export {isShowingRefForm}

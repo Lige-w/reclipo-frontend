@@ -12,7 +12,7 @@ import {requestCreateReference} from "../../../redux/actions/referenceActions";
 import {setIsShowingRefForm} from "../../../redux/actions/referenceActions";
 import AuthorFields from './AuthorFields'
 
-const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm}) => {
+const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm, refToEdit}) => {
 
     const [type, setType] = useState(referenceTypes[0])
     const [medium, setMedium] = useState(null)
@@ -29,6 +29,42 @@ const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm})
     const [volumeNumber, setVolumeNumber] = useState('')
     const [issueNumber, setIssueNumber] = useState('')
     const [tags, setTags] = useState('')
+
+    useEffect(() => {
+        if (refToEdit) {
+            const {
+                authors,
+                issue_number,
+                medium,
+                page_numbers,
+                publish_date,
+                publisher,
+                publisher_location,
+                reference_type,
+                tags,
+                title,
+                url,
+                volume_number
+            } = refToEdit
+            console.log(refToEdit)
+
+            setNumberOfAuthors(authors.length)
+            setAuthorsAttributes(authors.map(author => ({
+                firstName: author.first_name, lastName: author.last_name, middleInitial: author.middle_initial
+            })))
+            setIssueNumber(issue_number)
+            setMedium(medium)
+            setPageNumbers(page_numbers)
+            setDatePublished(publish_date)
+            setPublisher(publisher)
+            setPublisherLocation(publisher_location)
+            setType(reference_type)
+            setTags(tags.map(tag => tag.name).join(', '))
+            setTitle(title)
+            setUrl(url)
+            setVolumeNumber(volume_number)
+        }
+    },[])
 
     const mediaForSelectedType = () => {
         switch(type) {
@@ -188,7 +224,9 @@ const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm})
                     control={Input}
                     label='Page Numbers'
                     placeholder='Page Numbers'
-                    onChange={(e,{value}) => setPageNumbers(value)}/>
+                    onChange={(e,{value}) => setPageNumbers(value)}
+                    value={pageNumbers}
+                />
                 : null}
             {['Journal', 'Magazine', 'Newspaper'].includes(medium) ?
                 <Form.Group>
@@ -210,6 +248,9 @@ const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm})
 }
 
 export default connect(
-    state => ({projectId: state.currentProject.id}),
+    state => ({
+        projectId: state.currentProject.id,
+        refToEdit: state.refToEdit
+    }),
     {requestCreateReference, setIsShowingRefForm}
     )(ReferenceForm)

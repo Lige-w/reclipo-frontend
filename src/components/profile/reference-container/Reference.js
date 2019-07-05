@@ -6,7 +6,7 @@ import NotesContainer from '../../../containers/profile/reference-container/Note
 import ReferenceControls from './ReferenceControls'
 
 
-const Reference = ({requestCreateNote, reference: {
+const Reference = ({requestCreateNote, reference, reference: {
     id,
     title,
     publisher,
@@ -47,7 +47,7 @@ const Reference = ({requestCreateNote, reference: {
     return (
         <div className='reference'>
 
-            <ReferenceControls id={id} />
+            <ReferenceControls reference={reference}/>
             <div className="reference-header">{medium} </div>
             <div className="reference-details">
                 {authorElements}({publishDate.split('-')[0]}) <em>{title}</em>. {publisherLocation}: {publisher}
