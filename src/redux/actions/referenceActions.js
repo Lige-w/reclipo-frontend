@@ -1,10 +1,20 @@
-import {authPostFetch, authDeleteFetch, REFERENCES_URL} from "../../helpers/fetch";
+import {authPostFetch, authDeleteFetch, authPatchFetch, REFERENCES_URL} from "../../helpers/fetch";
 import {setCurrentProject} from "./projectActions";
 
 const requestCreateReference = (body) => {
     return dispatch => {
         return authPostFetch(REFERENCES_URL, body)
             .then(project => {
+                return dispatch(setCurrentProject(project))
+            })
+    }
+}
+
+const requestEditReference = (body) => {
+    return dispatch => {
+        return authPatchFetch(REFERENCES_URL + body.reference.id, body)
+            .then(project => {
+                setRefToEdit(null)
                 return dispatch(setCurrentProject(project))
             })
     }
@@ -28,4 +38,4 @@ const setRefToEdit = (reference) => ({
 
 const deleteReference = (id) => ({type: "DELETE_REFERENCE", id})
 
-export {requestCreateReference, requestDeleteReference, setIsShowingRefForm, setRefToEdit}
+export {requestCreateReference, requestEditReference, requestDeleteReference, setIsShowingRefForm, setRefToEdit}

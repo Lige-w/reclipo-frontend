@@ -8,11 +8,13 @@ import {
     onlineReferenceMedia
 } from '../../../helpers/referenceHelper'
 
-import {requestCreateReference} from "../../../redux/actions/referenceActions";
-import {setIsShowingRefForm} from "../../../redux/actions/referenceActions";
+import {
+    requestCreateReference, requestEditReference, setIsShowingRefForm
+} from "../../../redux/actions/referenceActions";
+
 import AuthorFields from './AuthorFields'
 
-const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm, refToEdit}) => {
+const ReferenceForm = ({requestCreateReference, requestEditReference, projectId, setIsShowingRefForm, refToEdit}) => {
 
     const [type, setType] = useState(referenceTypes[0])
     const [medium, setMedium] = useState(null)
@@ -46,7 +48,6 @@ const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm, 
                 url,
                 volume_number
             } = refToEdit
-            console.log(refToEdit)
 
             setNumberOfAuthors(authors.length)
             setAuthorsAttributes(authors.map(author => ({
@@ -98,11 +99,14 @@ const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm, 
         if(!mediaForSelectedType().includes(medium))setMedium(mediaForSelectedType()[0])
     }, [type])
 
-    const createReference = () => {
+    const submitReference = () => {
         const tags_attributes = tags.split(/,\s*/).map(tag => ({name: tag}))
-        const authors_attributes = authorsAttributes.map(({lastName, firstName, middleInitial}) => (
+        const authors_attributes = authorsAttributes
+            .filter(author => !!author.firstName || !!author.lastName)
+            .map(({lastName, firstName, middleInitial}) => (
             {last_name: lastName, first_name: firstName, middle_initial: middleInitial}
             ))
+
 
         const body = {reference: {
             reference_type: type,
@@ -117,9 +121,16 @@ const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm, 
             volume_number: volumeNumber,
             issue_number: issueNumber,
             tags_attributes,
-            project_ids: [projectId]
+
         }}
-        requestCreateReference(body)
+        if (refToEdit) {
+            body.current_project = projectId
+            body.reference.id = refToEdit.id
+            requestEditReference(body)
+        } else {
+            body.project_ids = [projectId]
+            requestCreateReference(body)
+        }
         setIsShowingRefForm(false)
     }
 
@@ -155,7 +166,7 @@ const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm, 
 
     return(
         <div id='reference-form'>
-        <Form  onSubmit={createReference}>
+        <Form  onSubmit={submitReference}>
             <Form.Group>
                 <Form.Field
                     control={Select}
@@ -241,7 +252,7 @@ const ReferenceForm = ({requestCreateReference, projectId, setIsShowingRefForm, 
                     onChange={(e, {value}) => setTags(value)}
                     value={tags}
                 />
-            <Button type='submit'>Create Reference</Button>
+            <Button type='submit'>{refToEdit? "Update" : "Create"} Reference</Button>
         </Form>
         </div>
     )
@@ -252,5 +263,5 @@ export default connect(
         projectId: state.currentProject.id,
         refToEdit: state.refToEdit
     }),
-    {requestCreateReference, setIsShowingRefForm}
+    {requestCreateReference, requestEditReference, setIsShowingRefForm}
     )(ReferenceForm)
