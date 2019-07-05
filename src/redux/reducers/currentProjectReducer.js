@@ -14,6 +14,20 @@ const currentProjectReducer = (state = null, action) => {
                 .notes.find(note => note.id===action.note.id)
             note.content = action.note.content
             return {...state}
+        case 'DELETE_REFERENCE':
+            const referencesCopy = [...state.references]
+            const referenceIndex = referencesCopy.findIndex(reference => reference.id === action.id)
+            referencesCopy.splice(referenceIndex, 1)
+            state.references = referencesCopy
+            return {...state}
+        case 'DELETE_NOTE':
+            const stateCopy = {...state}
+            const copyOfReferences = [...stateCopy.references]
+            const referenceCopy = copyOfReferences.find(reference => reference.id === action.note.reference_id)
+            referenceCopy.notes = referenceCopy.notes.filter(note => note.id !== action.note.id)
+            stateCopy.references = copyOfReferences
+            debugger
+            return stateCopy
         default: return state
     }
 }

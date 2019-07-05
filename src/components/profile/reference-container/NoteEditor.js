@@ -3,25 +3,22 @@ import {connect} from "react-redux";
 import {Editor, EditorState, convertToRaw, convertFromRaw} from 'draft-js'
 import {Icon, Button} from "semantic-ui-react";
 
-import {updateNoteContent} from "../../../redux/actions/noteActions";
+import {updateNoteContent, requestDeleteNote} from "../../../redux/actions/noteActions";
 
 import {authPatchFetch, NOTES_URL} from "../../../helpers/fetch";
 
 class NoteEditor extends Component {
     constructor(props) {
         super(props)
-
-
-
         this.state = {
             editorState: EditorState.createEmpty()
         }
     }
 
     componentDidMount() {
-        console.log('mounted')
-        if (this.props.note.content && this.props.note.content !== 'null') {
-            const editorContent = convertFromRaw(JSON.parse(this.props.note.content))
+        const {content} = this.props.note
+        if (content && content !== 'null') {
+            const editorContent = convertFromRaw(JSON.parse(content))
             this.setState({
                 editorState: EditorState.createWithContent(editorContent)
             })
@@ -57,13 +54,23 @@ class NoteEditor extends Component {
         }
     }
 
+    deleteNote = () => {
+        const {note, requestDeleteNote} = this.props
+        requestDeleteNote(note)
+    }
+
 
     render() {
         const {note: {id, name, content} } = this.props
         const {editorState} = this.state
         return (
             <div>
-                <div className='editor-toolbar'><Button onClick={this.saveNote}><Icon name='save outline' size='large'/></Button></div>
+                <div className='editor-toolbar'>
+                    <Button.Group>
+                    <Button onClick={this.saveNote} icon='save outline'/>
+                    <Button  onClick={this.deleteNote} icon='trash'/>
+                    </Button.Group>
+                </div>
                 <Editor
                     editorState={editorState}
                     onChange={this.onChange}
@@ -81,4 +88,4 @@ class NoteEditor extends Component {
 
 }
 
-export default connect(null, {updateNoteContent})(NoteEditor)
+export default connect(null, {updateNoteContent, requestDeleteNote})(NoteEditor)

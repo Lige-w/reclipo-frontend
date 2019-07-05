@@ -1,4 +1,4 @@
-import {authPostFetch, REFERENCES_URL} from "../../helpers/fetch";
+import {authPostFetch, authDeleteFetch, REFERENCES_URL} from "../../helpers/fetch";
 import {setCurrentProject} from "./projectActions";
 
 const requestCreateReference = (body) => {
@@ -10,4 +10,13 @@ const requestCreateReference = (body) => {
     }
 }
 
-export {requestCreateReference}
+const requestDeleteReference = (id) => {
+    return dispatch => {
+        return authDeleteFetch(REFERENCES_URL + id)
+            .then(data => dispatch(deleteReference(id)))
+    }
+}
+
+const deleteReference = (id) => ({type: "DELETE_REFERENCE", id})
+
+export {requestCreateReference, requestDeleteReference}

@@ -1,4 +1,4 @@
-import {authPostFetch, NOTES_URL} from "../../helpers/fetch";
+import {authDeleteFetch, authPostFetch, NOTES_URL} from "../../helpers/fetch";
 
 const requestCreateNote = (body) => {
     return dispatch => {
@@ -15,5 +15,17 @@ const updateNoteContent = (note) => ({
     type: 'UPDATE_NOTE_CONTENT', note
 })
 
-export {requestCreateNote, updateNoteContent}
+const requestDeleteNote = (note) => (
+    dispatch => {
+        return authDeleteFetch(NOTES_URL + note.id)
+            .then(message => dispatch(deleteNote(note)))
+    }
+)
+
+const deleteNote = (note) => ({
+    type: 'DELETE_NOTE', note
+})
+
+
+export {requestCreateNote, updateNoteContent, requestDeleteNote}
 

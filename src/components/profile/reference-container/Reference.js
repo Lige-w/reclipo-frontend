@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import {connect} from "react-redux";
-import {Button, Icon, Tab} from "semantic-ui-react";
+import {Button, Icon, Tab, Dropdown} from "semantic-ui-react";
 
 import NotesContainer from '../../../containers/profile/reference-container/NotesContainer'
+import ReferenceControls from './ReferenceControls'
 
 
 const Reference = ({requestCreateNote, reference: {
@@ -38,18 +39,21 @@ const Reference = ({requestCreateNote, reference: {
         }
     })
 
-    const tagsElement = tags.map(tag => tag.name).join(' ')
+    const tagsElement = tags.map(tag => tag.name).join(', ')
 
 
 
 
     return (
         <div className='reference'>
-            <div className="reference-header">{medium} <span className="float-right"><strong>Tags: </strong>{tagsElement}</span></div>
+
+            <ReferenceControls id={id} />
+            <div className="reference-header">{medium} </div>
             <div className="reference-details">
                 {authorElements}({publishDate.split('-')[0]}) <em>{title}</em>. {publisherLocation}: {publisher}
             </div>
             <NotesContainer referenceId={id} notes={notes}/>
+            <span><strong>Tags: </strong>{tagsElement}</span>
         </div>
     )
 }
