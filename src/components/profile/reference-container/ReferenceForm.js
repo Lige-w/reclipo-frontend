@@ -14,7 +14,9 @@ import {
 
 import AuthorFields from './AuthorFields'
 
-const ReferenceForm = ({requestCreateReference, requestEditReference, projectId, setIsShowingRefForm, refToEdit}) => {
+const ReferenceForm = (
+    {requestCreateReference, requestEditReference, currentProject, setIsShowingRefForm, refToEdit, projects}
+) => {
 
     const [type, setType] = useState(referenceTypes[0])
     const [medium, setMedium] = useState(null)
@@ -31,6 +33,7 @@ const ReferenceForm = ({requestCreateReference, requestEditReference, projectId,
     const [volumeNumber, setVolumeNumber] = useState('')
     const [issueNumber, setIssueNumber] = useState('')
     const [tags, setTags] = useState('')
+    const [projectIds, setProjectIds] = useState([])
 
     useEffect(() => {
         if (refToEdit) {
@@ -46,7 +49,8 @@ const ReferenceForm = ({requestCreateReference, requestEditReference, projectId,
                 tags,
                 title,
                 url,
-                volume_number
+                volume_number,
+                projects
             } = refToEdit
 
             setNumberOfAuthors(authors.length)
@@ -64,6 +68,9 @@ const ReferenceForm = ({requestCreateReference, requestEditReference, projectId,
             setTitle(title)
             setUrl(url)
             setVolumeNumber(volume_number)
+            setProjectIds(projects.map(project => project.id))
+        } else if (currentProject && !refToEdit) {
+            setProjectIds([currentProject.id])
         }
     },[])
 
@@ -104,31 +111,29 @@ const ReferenceForm = ({requestCreateReference, requestEditReference, projectId,
         const authors_attributes = authorsAttributes
             .filter(author => !!author.firstName || !!author.lastName)
             .map(({lastName, firstName, middleInitial}) => (
-            {last_name: lastName, first_name: firstName, middle_initial: middleInitial}
+                {last_name: lastName, first_name: firstName, middle_initial: middleInitial}
             ))
 
 
         const body = {reference: {
-            reference_type: type,
-            medium,
-            authors_attributes,
-            title,
-            publish_date: datePublished,
-            publisher_location: publisherLocation,
-            publisher,
-            url,
-            page_numbers: pageNumbers,
-            volume_number: volumeNumber,
-            issue_number: issueNumber,
-            tags_attributes,
-
-        }}
+                reference_type: type,
+                medium,
+                authors_attributes,
+                title,
+                publish_date: datePublished,
+                publisher_location: publisherLocation,
+                publisher,
+                url,
+                page_numbers: pageNumbers,
+                volume_number: volumeNumber,
+                issue_number: issueNumber,
+                tags_attributes,
+                project_ids: projectIds
+            }}
         if (refToEdit) {
-            body.current_project = projectId
             body.reference.id = refToEdit.id
             requestEditReference(body)
         } else {
-            body.project_ids = [projectId]
             requestCreateReference(body)
         }
         setIsShowingRefForm(false)
@@ -154,6 +159,8 @@ const ReferenceForm = ({requestCreateReference, requestEditReference, projectId,
 
     const typeOptions = referenceTypes.map(type => ({key: type, value: type, text: type}))
 
+    const projectOptions = projects.map(({id, title}) => ({key: id, value: id, text: title}))
+
     const authorsFields = authorsAttributes.map((author, i) => (
         <AuthorFields
             key={`author-fields-${i}`}
@@ -166,85 +173,85 @@ const ReferenceForm = ({requestCreateReference, requestEditReference, projectId,
 
     return(
         <div id='reference-form'>
-        <Form  onSubmit={submitReference}>
-            <Form.Group>
-                <Form.Field
-                    control={Select}
-                    label='Type'
-                    search
-                    selection
-                    value={type}
-                    onChange={(e, {value})=> setType(value)}
-                    options={typeOptions}
-                />
-                <Form.Field
-                    control={Select}
-                    label='Medium'
-                    search
-                    selection
-                    value={medium}
-                    onChange={(e, {value})=> setMedium(value)}
-                    options={mediumOptions}
-                />
-                <Form.Field
-                    control={Input}
-                    onChange={changeNumberOfAuthors}
-                    label={`Number of ${creatorType()}s`}
-                    placeholder={`Number of ${creatorType()}s`}
-                    value={numberOfAuthors}
-                    min='0'
-                    type='number'
-                />
-            </Form.Group>
-            {authorsFields}
-            <Form.Field
-                control={Input}
-                multiple
-                label="Title"
-                placeholder="Title"
-                onChange={(e,{value}) => setTitle(value)}
-                value={title}
-            />
-            <Form.Field
-                control={Input}
-                label="Date Published"
-                placeholder="Date Published" type='date'
-                onChange={(e,{value}) => setDatePublished(value)}
-                value={datePublished}
-            />
-            <Form.Field
-                control={Input}
-                label='Publisher Location'
-                placeholder='Publisher Location'
-                onChange={(e,{value}) => setPublisherLocation(value)}
-                value={publisherLocation}
-            />
-            <Form.Field
-                control={Input}
-                label='Publisher'
-                placeholder='Publisher'
-                onChange={(e,{value}) => setPublisher(value)}
-                value={publisher}
-            />
-            {medium === ''}
-            {type === 'Online' ?
-                <Form.Field control={Input} label='URL' placeholder='URL' onChange={(e,{value}) => setUrl(value)}/>
-                : null}
-            {type === 'Print' ?
-                <Form.Field
-                    control={Input}
-                    label='Page Numbers'
-                    placeholder='Page Numbers'
-                    onChange={(e,{value}) => setPageNumbers(value)}
-                    value={pageNumbers}
-                />
-                : null}
-            {['Journal', 'Magazine', 'Newspaper'].includes(medium) ?
+            <Form  onSubmit={submitReference}>
                 <Form.Group>
-                    <Form.Field control={Input} label='Volume Number' placeholder='Volume Number'  onChange={(e,{value}) => setVolumeNumber(value)}/>
-                    <Form.Field control={Input} label='Issue Number' placeholder='Issue Number' onChange={(e,{value}) => setIssueNumber(value)}/>
+                    <Form.Field
+                        control={Select}
+                        label='Type'
+                        search
+                        selection
+                        value={type}
+                        onChange={(e, {value})=> setType(value)}
+                        options={typeOptions}
+                    />
+                    <Form.Field
+                        control={Select}
+                        label='Medium'
+                        search
+                        selection
+                        value={medium}
+                        onChange={(e, {value})=> setMedium(value)}
+                        options={mediumOptions}
+                    />
+                    <Form.Field
+                        control={Input}
+                        onChange={changeNumberOfAuthors}
+                        label={`Number of ${creatorType()}s`}
+                        placeholder={`Number of ${creatorType()}s`}
+                        value={numberOfAuthors}
+                        min='0'
+                        type='number'
+                    />
                 </Form.Group>
-                : null}
+                {authorsFields}
+                <Form.Field
+                    control={Input}
+                    multiple
+                    label="Title"
+                    placeholder="Title"
+                    onChange={(e,{value}) => setTitle(value)}
+                    value={title}
+                />
+                <Form.Field
+                    control={Input}
+                    label="Date Published"
+                    placeholder="Date Published" type='date'
+                    onChange={(e,{value}) => setDatePublished(value)}
+                    value={datePublished}
+                />
+                <Form.Field
+                    control={Input}
+                    label='Publisher Location'
+                    placeholder='Publisher Location'
+                    onChange={(e,{value}) => setPublisherLocation(value)}
+                    value={publisherLocation}
+                />
+                <Form.Field
+                    control={Input}
+                    label='Publisher'
+                    placeholder='Publisher'
+                    onChange={(e,{value}) => setPublisher(value)}
+                    value={publisher}
+                />
+                {medium === ''}
+                {type === 'Online' ?
+                    <Form.Field control={Input} label='URL' placeholder='URL' onChange={(e,{value}) => setUrl(value)}/>
+                    : null}
+                {type === 'Print' ?
+                    <Form.Field
+                        control={Input}
+                        label='Page Numbers'
+                        placeholder='Page Numbers'
+                        onChange={(e,{value}) => setPageNumbers(value)}
+                        value={pageNumbers}
+                    />
+                    : null}
+                {['Journal', 'Magazine', 'Newspaper'].includes(medium) ?
+                    <Form.Group>
+                        <Form.Field control={Input} label='Volume Number' placeholder='Volume Number'  onChange={(e,{value}) => setVolumeNumber(value)}/>
+                        <Form.Field control={Input} label='Issue Number' placeholder='Issue Number' onChange={(e,{value}) => setIssueNumber(value)}/>
+                    </Form.Group>
+                    : null}
                 <Form.Field
                     control={Input}
                     label='Tags'
@@ -252,16 +259,25 @@ const ReferenceForm = ({requestCreateReference, requestEditReference, projectId,
                     onChange={(e, {value}) => setTags(value)}
                     value={tags}
                 />
-            <Button type='submit'>{refToEdit? "Update" : "Create"} Reference</Button>
-        </Form>
+                <Form.Field
+                    control={Select}
+                    multiple
+                    label='Project'
+                    options={projectOptions}
+                    value={projectIds}
+                    onChange={(e, {value}) => setProjectIds(value)}
+                />
+                <Button type='submit'>{refToEdit? "Update" : "Create"} Reference</Button>
+            </Form>
         </div>
     )
 }
 
 export default connect(
     state => ({
-        projectId: state.currentProject.id,
+        projects: state.projects,
+        currentProject: state.currentProject,
         refToEdit: state.refToEdit
     }),
     {requestCreateReference, requestEditReference, setIsShowingRefForm}
-    )(ReferenceForm)
+)(ReferenceForm)

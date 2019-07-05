@@ -4,7 +4,7 @@ import {setCurrentProject} from "./projectActions";
 const requestGetUserReferences = () => {
     return dispatch => {
         return authGetFetch(REFERENCES_URL)
-            .then(references => dispatch(setUserReferences(references)))
+            .then(references => dispatch(setReferences(references)))
     }
 }
 
@@ -34,8 +34,8 @@ const requestDeleteReference = (id) => {
     }
 }
 
-const setUserReferences = (references) => ({
-    type: 'SET_USER_REFERENCES', references
+const setReferences = (references) => ({
+    type: 'SET_REFERENCES', references
 })
 
 const setIsShowingRefForm = (boolean) => ({
@@ -49,4 +49,12 @@ const setRefToEdit = (reference) => ({
 
 const deleteReference = (id) => ({type: "DELETE_REFERENCE", id})
 
-export {requestGetUserReferences, requestCreateReference, requestEditReference, requestDeleteReference, setIsShowingRefForm, setRefToEdit}
+export {
+    requestGetUserReferences,
+    requestCreateReference,
+    requestEditReference,
+    requestDeleteReference,
+    setIsShowingRefForm,
+    setRefToEdit,
+    setReferences
+}

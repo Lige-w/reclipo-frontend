@@ -1,4 +1,5 @@
 import {PROJECTS_URL, authPostFetch, authGetFetch, authDeleteFetch} from "../../helpers/fetch";
+import {setReferences} from "./referenceActions";
 
 const requestCreateProject = (body, setIsModalShowing) => {
     return dispatch => {
@@ -22,7 +23,8 @@ const requestProjectDetails = (id) => {
     return dispatch => {
         return authGetFetch(`${PROJECTS_URL}${id}`)
             .then(project => {
-                return dispatch(setCurrentProject(project))
+                dispatch(setReferences(project.references))
+                dispatch(setCurrentProject(project))
             })
     }
 }
@@ -52,8 +54,6 @@ const setCurrentProject = project => {
 const unsetCurrentProject = id => {
     return {type: 'UNSET_CURRENT_PROJECT', id}
 }
-
-const deleteProject = (id) => ({type: 'DELETE_PROJECT', id})
 
 
 export {

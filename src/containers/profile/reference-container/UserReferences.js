@@ -3,13 +3,13 @@ import {connect} from "react-redux";
 import {requestGetUserReferences} from "../../../redux/actions/referenceActions";
 import Reference from "../../../components/profile/reference-container/Reference"
 
-const UserReferences = ({userReferences, requestGetUserReferences}) => {
+const UserReferences = ({references, requestGetUserReferences}) => {
 
     useEffect(() => {
         requestGetUserReferences()
     }, [])
 
-    const referenceComponents = userReferences.map(reference => (
+    const referenceComponents = references.map(reference => (
         <Reference key={reference.id} reference={reference} />
     ))
 
@@ -20,4 +20,4 @@ const UserReferences = ({userReferences, requestGetUserReferences}) => {
     )
 }
 
-export default connect(state => ({userReferences: state.userReferences}), {requestGetUserReferences})(UserReferences)
+export default connect(state => ({references: state.references}), {requestGetUserReferences})(UserReferences)
