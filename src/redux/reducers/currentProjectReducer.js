@@ -26,7 +26,6 @@ const currentProjectReducer = (state = null, action) => {
             const referenceCopy = copyOfReferences.find(reference => reference.id === action.note.reference_id)
             referenceCopy.notes = referenceCopy.notes.filter(note => note.id !== action.note.id)
             stateCopy.references = copyOfReferences
-            debugger
             return stateCopy
         default: return state
     }
