@@ -107,6 +107,7 @@ const ReferenceForm = (
     }, [type])
 
     const submitReference = () => {
+        if (!projectIds.length) {return alert('Reference must be associated with at least one project')}
         const tags_attributes = tags.split(/,\s*/).map(tag => ({name: tag}))
         const authors_attributes = authorsAttributes
             .filter(author => !!author.firstName || !!author.lastName)
