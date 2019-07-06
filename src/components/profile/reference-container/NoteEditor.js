@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
-import {Editor, EditorState, convertToRaw, convertFromRaw} from 'draft-js'
+import {Editor, EditorState, RichUtils, convertToRaw, convertFromRaw} from 'draft-js'
 import {Icon, Button} from "semantic-ui-react";
 
 import {updateNoteContent, requestDeleteNote} from "../../../redux/actions/noteActions";
@@ -59,6 +59,16 @@ class NoteEditor extends Component {
         requestDeleteNote(note)
     }
 
+    handleKeyCommand = command => {
+        const {editorState} = this.state
+        const newState = RichUtils.handleKeyCommand(editorState, command)
+        if (newState) {
+            this.setState({editorState: newState})
+            return 'handled'
+        } else {
+            return 'not-handled'
+        }
+    }
 
     render() {
         const {note: {id, name, content} } = this.props
@@ -74,6 +84,7 @@ class NoteEditor extends Component {
                 <Editor
                     editorState={editorState}
                     onChange={this.onChange}
+                    handleKeyCommand={this.handleKeyCommand}
                     // blockRendererFn={}
                     // blockStyleFn={}
                     // keyBindingFn={}
