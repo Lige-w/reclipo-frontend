@@ -9,5 +9,5 @@ Users can then store detailed notes on the cited sources, and share sources acro
 - Draft.js is used to build rich-text-editors which give users full functionality for detailed note taking.
 - Includes JWT to send and receive encrypted user information
 
-
+RePrO Backend: https://github.com/Lige-w/repro-backend
 
