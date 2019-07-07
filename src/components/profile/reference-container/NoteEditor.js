@@ -86,6 +86,7 @@ class NoteEditor extends Component {
     }
 
     setStyle = (style) => {
+        this.editor.focus()
         this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, style))
     }
 
@@ -99,7 +100,7 @@ class NoteEditor extends Component {
         return (
             <div>
                 <div className='editor-toolbar'>
-                    <Dropdown onChange={(e, {value}) => this.setBlockType(value)} options={headerOptions} on/>
+                    <Dropdown onChange={(e, {value}) => this.setBlockType(value)} defaultValue='unstyled' options={headerOptions} />
                     <Button.Group>
                         <Button onClick={() => this.setStyle("BOLD")} icon='bold' />
                         <Button onClick={() => this.setStyle("ITALIC")} icon='italic' />

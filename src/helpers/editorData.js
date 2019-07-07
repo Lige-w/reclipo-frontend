@@ -15,6 +15,16 @@ const headerOptions = [
         key: 'h3',
         value: 'header-three',
         text: <h3>Section Header</h3>
+    },
+    {
+        key: 'h4',
+        value: 'header-four',
+        text: <h4>Section Sub-Header</h4>
+    },
+    {
+        key: 'unstyled',
+        value: 'unstyled',
+        text: 'none'
     }
 ]
 
