@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 import {Editor, EditorState, RichUtils, convertToRaw, convertFromRaw} from 'draft-js'
-import {Icon, Button} from "semantic-ui-react";
+import {Icon, Button, Dropdown, Label} from "semantic-ui-react";
+import 'draft-js/dist/Draft.css'
 
 import {updateNoteContent, requestDeleteNote} from "../../../redux/actions/noteActions";
-
 import {authPatchFetch, NOTES_URL} from "../../../helpers/fetch";
+import {headerOptions} from "../../../helpers/editorData";
 
 class NoteEditor extends Component {
     constructor(props) {
@@ -42,7 +43,6 @@ class NoteEditor extends Component {
     onChange = (editorState) => {
         const {note, updateNoteContent} = this.props
         this.setState({editorState})
-
         const content = JSON.stringify(convertToRaw(editorState.getCurrentContent()))
         updateNoteContent({...note, content})
     }
@@ -59,15 +59,38 @@ class NoteEditor extends Component {
         requestDeleteNote(note)
     }
 
-    handleKeyCommand = command => {
-        const {editorState} = this.state
-        const newState = RichUtils.handleKeyCommand(editorState, command)
+    onTab = (e) => {
+        e.preventDefault()
+        const newState = RichUtils.onTab(e, this.state.editorState, 4)
         if (newState) {
-            this.setState({editorState: newState})
+            this.onChange(newState)
             return 'handled'
         } else {
             return 'not-handled'
         }
+    }
+
+    handleReturn = e => {
+
+    }
+
+    handleKeyCommand = command => {
+        const {editorState} = this.state
+        const newState = RichUtils.handleKeyCommand(editorState, command)
+        if (newState) {
+            this.onChange(newState)
+            return 'handled'
+        } else {
+            return 'not-handled'
+        }
+    }
+
+    setStyle = (style) => {
+        this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, style))
+    }
+
+    setBlockType = (type) => {
+        this.onChange(RichUtils.toggleBlockType(this.state.editorState, type))
     }
 
     render() {
@@ -76,22 +99,35 @@ class NoteEditor extends Component {
         return (
             <div>
                 <div className='editor-toolbar'>
+                    <Dropdown onChange={(e, {value}) => this.setBlockType(value)} options={headerOptions} on/>
                     <Button.Group>
-                    <Button onClick={this.saveNote} icon='save outline'/>
-                    <Button  onClick={this.deleteNote} icon='trash'/>
+                        <Button onClick={() => this.setStyle("BOLD")} icon='bold' />
+                        <Button onClick={() => this.setStyle("ITALIC")} icon='italic' />
+                        <Button onClick={() => this.setStyle("UNDERLINE")} icon='underline' />
+                    </Button.Group>
+                    <Button.Group>
+                        <Button onClick={() => this.setBlockType("unordered-list-item")} icon='list ul'/>
+                        <Button onClick={() => this.setBlockType('ordered-list-item')} icon='list ol'/>
+                    </Button.Group>
+                    <Button.Group>
+                        <Button onClick={this.saveNote} icon='save outline'/>
+                        <Button  onClick={this.deleteNote} icon='trash'/>
                     </Button.Group>
                 </div>
                 <Editor
                     editorState={editorState}
                     onChange={this.onChange}
                     handleKeyCommand={this.handleKeyCommand}
-                    // blockRendererFn={}
+                    // blockRendererFn={myBlockRendererFn}
                     // blockStyleFn={}
                     // keyBindingFn={}
+                    handleReturn={this.handleReturn}
                     readOnly={false}
-                    spellCheck={true}
+                    // spellCheck={true}
                     stripPastedStyles={false}
                     // blockRenderMap={}
+                    onTab={this.onTab}
+                    ref={(editor) => { this.editor = editor; }}
                 />
             </div>
         )
