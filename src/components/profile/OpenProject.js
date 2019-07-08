@@ -7,7 +7,7 @@ import DeleteProjectModal from './DeleteProjectModal'
 
 const OpenProject =  ({project: {id, title, description}, username}) => {
     return (
-        <div>
+        <div className='controller-link'>
             <Link to={`/${username}/${id}_${title.toLowerCase().replace(/\s/g, '_')}`}>
                 <Icon name='folder'/>
                 <strong> {title}</strong>

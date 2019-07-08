@@ -13,6 +13,15 @@
     padding: 10px;
 }
 
+a {
+   color: #D5D5D5;
+}
+
+a:hover, .controller-link:hover {
+    color: #AAAAAA;
+    cursor: pointer;
+}
+
 #reference-form {
     padding: 5px 10px;
     overflow-y: scroll;

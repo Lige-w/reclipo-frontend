@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ReferencesController from './ReferencesController'
+import ReferencesController from './ReferencesToolbar'
 import ReferencesView from './ReferencesView'
 import ReferenceForm from '../../../components/profile/reference-container/ReferenceForm'
 import {connect} from "react-redux";

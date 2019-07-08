@@ -21,7 +21,9 @@ const NewProject = ({requestCreateProject}) => {
             onClose={() => setIsModalShowing(false)}
             open={isModalShowing}
             trigger={
-                <div onClick={()=>setIsModalShowing(true)}><Icon name='add'/> <strong>New Project</strong></div>
+                <div className='controller-link' onClick={()=>setIsModalShowing(true)}>
+                    <Icon name='add'/> <strong>New Project</strong>
+                </div>
             }
         >
             <Header icon='add' content={'New Project'}/>

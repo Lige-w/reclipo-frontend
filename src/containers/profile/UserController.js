@@ -12,8 +12,8 @@ const UserController = ({logout, match}) => {
 
     return (
         <div id="user-controller">
-            <Link to={match.path}><Icon name='home'/> Home</Link>
-            <div id='logout' onClick={handleLogout}><Icon name='sign out'/> <strong>Log Out</strong></div>
+            <Link to={match.path}><Icon name='home'/> <strong>Home</strong></Link>
+            <div className='controller-link' id='logout' onClick={handleLogout}><Icon name='sign out'/> <strong>Log Out</strong></div>
         </div>
     )
 }
