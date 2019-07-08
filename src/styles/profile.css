@@ -36,6 +36,7 @@ a:hover, .controller-link:hover {
 }
 
 #resources-controller {
+    padding: 10px;
     background: #3E3E3E;
     border-bottom: 1px solid #6A6A6A;
     color: #D5D5D5;
