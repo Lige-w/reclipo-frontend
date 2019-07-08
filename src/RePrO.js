@@ -49,14 +49,12 @@ const RePrO = ({user, requestAuth}) => {
 
     return (
         <div className="repro">
-            <Switch >
-                <div className={`home-background${user? '' : ' login'}`}>
-                    <Route path='/' render={redirectHome} />
-                    <Route exact path='/login' render={showLogin} />
-                    <Route exact path='/register' render={showRegister} />
+            <div className={`home-background${user? '' : ' login'}`}>
+                <Route path='/' render={redirectHome} />
+                <Route exact path='/login' render={showLogin} />
+                <Route exact path='/register' render={showRegister} />
                 {user ? <Route path={`/${user.username}`} render={showProfile}/> : null}
-                </div>
-            </Switch>
+            </div>
         </div>
     );
 }

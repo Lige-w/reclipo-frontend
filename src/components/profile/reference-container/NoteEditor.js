@@ -8,6 +8,8 @@ import {updateNoteContent, requestDeleteNote} from "../../../redux/actions/noteA
 import {authPatchFetch, NOTES_URL} from "../../../helpers/fetch";
 import {headerOptions} from "../../../helpers/editorData";
 
+import DeleteNoteModal from './DeleteNoteModal'
+
 class NoteEditor extends Component {
     constructor(props) {
         super(props)
@@ -54,10 +56,7 @@ class NoteEditor extends Component {
         }
     }
 
-    deleteNote = () => {
-        const {note, requestDeleteNote} = this.props
-        requestDeleteNote(note)
-    }
+
 
     onTab = (e) => {
         e.preventDefault()
@@ -96,6 +95,7 @@ class NoteEditor extends Component {
 
     render() {
         const {editorState} = this.state
+        const {name, note} = this.props
         return (
             <div>
                 <div className='editor-toolbar'>
@@ -111,7 +111,7 @@ class NoteEditor extends Component {
                     </Button.Group>
                     <Button.Group>
                         <Button onClick={this.saveNote} icon='save outline'/>
-                        <Button  onClick={this.deleteNote} icon='trash'/>
+                        <DeleteNoteModal note={note} name={name} />
                     </Button.Group>
                 </div>
                 <Editor
@@ -135,4 +135,4 @@ class NoteEditor extends Component {
 
 }
 
-export default connect(null, {updateNoteContent, requestDeleteNote})(NoteEditor)
+export default connect(null, {updateNoteContent})(NoteEditor)

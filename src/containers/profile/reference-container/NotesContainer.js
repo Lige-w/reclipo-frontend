@@ -29,9 +29,11 @@ const NotesContainer = ({notes, referenceId, requestCreateNote}) => {
     ))
 
     const notePanes = notes.length < 6 ?
-        notes.map((note , i)=> (
-            {menuItem: note.name || `Note ${i + 1}`, render: () => <Tab.Pane key={note.id}><NoteEditor note={note} /></Tab.Pane>}
-        ))
+        notes.map((note , i)=> ({
+            menuItem: note.name || `Note ${i + 1}`, render: () => (
+                <Tab.Pane key={note.id}><NoteEditor name={note.name || `Note ${i + 1}`} note={note}/></Tab.Pane>
+            )
+        }))
         :
         [{menuItem: <Dropdown
                 key={`dropdown-${referenceId}`}
