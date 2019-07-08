@@ -3,11 +3,6 @@
     border: solid 1px
 }
 
-.new-note {
-    text-align: center;
-    background-color: #D5D5D5;
-}
-
 div.note-dropdown.ui.scrolling.dropdown {
     /*margin-top: 10px;*/
     background: #ffffff;
@@ -44,6 +39,6 @@ div.ui.bottom.attached.segment.active.tab {
     padding: 7px;
 }
 
-.tags {
+.tags, .notes-container {
     margin: 5px;
 }

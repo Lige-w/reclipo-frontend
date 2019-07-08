@@ -1,6 +1,6 @@
 import React, {Fragment, useState} from 'react'
 import {connect} from "react-redux";
-import {Icon, Tab, Dropdown} from "semantic-ui-react";
+import {Icon, Tab, Dropdown, Button} from "semantic-ui-react";
 
 import {requestCreateNote} from "../../../redux/actions/noteActions";
 
@@ -50,8 +50,8 @@ const NotesContainer = ({notes, referenceId, requestCreateNote}) => {
         </Tab.Pane>}]
 
     return (
-        <Fragment>
-            <div className='new-note' onClick={createNote}><Icon name='add'/> <strong>Add Note</strong></div>
+        <div className='notes-container'>
+            <Button className='full-width-button' onClick={createNote}><Icon name='add'/> <strong>Add Note</strong></Button>
             {!!notes.length ?
                 <Fragment>
                     <div className='show-note' onClick={() => setIsShowingNotes(!isShowingNotes)}>
@@ -64,7 +64,7 @@ const NotesContainer = ({notes, referenceId, requestCreateNote}) => {
                         : null}
                 </Fragment>
                 :null}
-        </Fragment>
+        </div>
     )
 }
 

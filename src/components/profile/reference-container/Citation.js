@@ -65,7 +65,7 @@ const Citation = ({reference: {
                     {authorElements}
                     {publishDate? ` (${publishDate.split('-')[0]}). ` : null}
                     {title}. <em>{publisher}</em>
-                    {volumeNumber? `, ${volumeNumber}(${issueNumber}) ` : null}
+                    {volumeNumber? `, ${volumeNumber}(${issueNumber})` : null}
                     {pageNumbers ? `, ${pageNumbers}` : null}
                     {url? `. Retrieved from ${url}` : null}
                 </span>
