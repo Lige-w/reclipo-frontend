@@ -1,5 +1,4 @@
 .reference {
-    padding: 10px;
     width: inherit;
     border: solid 1px
 }
@@ -14,6 +13,7 @@ div.note-dropdown.ui.scrolling.dropdown {
     background: #ffffff;
     border-top: solid 1px #CECECE;
     border-right: solid 1px #CECECE;
+    border-left: solid 1px #CECECE;
     border-radius: 4px 4px 0 0;
 }
 
@@ -27,4 +27,23 @@ div.ui.bottom.attached.segment.active.tab {
 
 .editor-container {
     padding: 20px;
+}
+
+.reference-header {
+    padding: 5px;
+    background: #CECECE;
+}
+
+.reference-details {
+    padding-left: 2em;
+    text-indent: -2em;
+    margin: 5px;
+}
+
+.ui.menu div.item {
+    padding: 7px;
+}
+
+.tags {
+    margin: 5px;
 }

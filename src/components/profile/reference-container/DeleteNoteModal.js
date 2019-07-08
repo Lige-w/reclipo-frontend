@@ -13,7 +13,11 @@ const DeleteNoteModal = ({name, note, requestDeleteNote}) => {
     }
 
     return (
-        <Modal open={isShowingModal} trigger={<Button onClick={() => setIsShowingModal(true)} icon='trash'/>} >
+        <Modal
+            onClose={() => setIsShowingModal(false)}
+            open={isShowingModal}
+            trigger={<Button onClick={() => setIsShowingModal(true)} icon='trash'/>}
+        >
             <Modal.Header>Delete Note</Modal.Header>
             <Modal.Content>Are you sure you want to delete {name}?</Modal.Content>
             <Modal.Actions>

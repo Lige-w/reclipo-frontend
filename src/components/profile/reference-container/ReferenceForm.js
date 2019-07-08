@@ -34,6 +34,7 @@ const ReferenceForm = (
     const [issueNumber, setIssueNumber] = useState('')
     const [tags, setTags] = useState('')
     const [projectIds, setProjectIds] = useState([])
+    const [journal, setJournal] = useState('')
 
     useEffect(() => {
         if (refToEdit) {
@@ -121,6 +122,7 @@ const ReferenceForm = (
                 medium,
                 authors_attributes,
                 title,
+                journal,
                 publish_date: datePublished,
                 publisher_location: publisherLocation,
                 publisher,
@@ -175,7 +177,7 @@ const ReferenceForm = (
     return(
         <div id='reference-form'>
             <Form  onSubmit={submitReference}>
-            <Icon onClick={()=>{setIsShowingRefForm(false)}} className='float-right' size='large' name='delete' />
+                <Icon onClick={()=>{setIsShowingRefForm(false)}} className='float-right' size='large' name='delete' />
                 <Form.Group>
                     <Form.Field
                         control={Select}
@@ -206,40 +208,65 @@ const ReferenceForm = (
                     />
                 </Form.Group>
                 {authorsFields}
-                <Form.Field
-                    control={Input}
-                    multiple
-                    label="Title"
-                    placeholder="Title"
-                    onChange={(e,{value}) => setTitle(value)}
-                    value={title}
-                />
-                <Form.Field
+                { medium === 'Journal' ?
+                    <Form.Group>
+                        <Form.Field
+                            control={Input}
+                            label='Article Title'
+                            placeholder='Article Title'
+                            onChange={(e, {value}) => setTitle(value)}
+                            value={title}
+                        />
+                        <Form.Field
+                            control={Input}
+                            label='Journal'
+                            placeholder='Journal'
+                            onChange={(e, {value}) => setPublisher(value)}
+                            value={publisher}
+                        />
+                    </Form.Group>
+                    : <Form.Field
+                        control={Input}
+                        multiple
+                        label="Title"
+                        placeholder="Title"
+                        onChange={(e, {value}) => setTitle(value)}
+                        value={title}
+                    />
+                }
+                < Form.Field
                     control={Input}
                     label="Date Published"
                     placeholder="Date Published" type='date'
                     onChange={(e,{value}) => setDatePublished(value)}
                     value={datePublished}
                 />
-                <Form.Field
-                    control={Input}
-                    label='Publisher Location'
-                    placeholder='Publisher Location'
-                    onChange={(e,{value}) => setPublisherLocation(value)}
-                    value={publisherLocation}
-                />
-                <Form.Field
-                    control={Input}
-                    label='Publisher'
-                    placeholder='Publisher'
-                    onChange={(e,{value}) => setPublisher(value)}
-                    value={publisher}
-                />
-                {medium === ''}
-                {type === 'Online' ?
-                    <Form.Field control={Input} label='URL' placeholder='URL' onChange={(e,{value}) => setUrl(value)}/>
+                {['Journal', 'Magazine', 'Newspaper'].includes(medium) ?
+                    <Form.Group>
+                        <Form.Field control={Input} label='Volume Number' placeholder='Volume Number'  onChange={(e,{value}) => setVolumeNumber(value)}/>
+                        <Form.Field control={Input} label='Issue Number' placeholder='Issue Number' onChange={(e,{value}) => setIssueNumber(value)}/>
+                    </Form.Group>
                     : null}
-                {type === 'Print' ?
+                { medium === 'Book' ?
+                    <Form.Group>
+                        <Form.Field
+                            control={Input}
+                            label='Publisher Location'
+                            placeholder='Publisher Location'
+                            onChange={(e, {value}) => setPublisherLocation(value)}
+                            value={publisherLocation}
+                        />
+                        < Form.Field
+                            control={Input}
+                            label='Publisher'
+                            placeholder='Publisher'
+                            onChange={(e,{value}) => setPublisher(value)}
+                            value={publisher}
+                        />
+                    </Form.Group>  : null
+                }
+                {medium === ''}
+                {type === 'Print' || medium === 'Journal' ?
                     <Form.Field
                         control={Input}
                         label='Page Numbers'
@@ -248,11 +275,8 @@ const ReferenceForm = (
                         value={pageNumbers}
                     />
                     : null}
-                {['Journal', 'Magazine', 'Newspaper'].includes(medium) ?
-                    <Form.Group>
-                        <Form.Field control={Input} label='Volume Number' placeholder='Volume Number'  onChange={(e,{value}) => setVolumeNumber(value)}/>
-                        <Form.Field control={Input} label='Issue Number' placeholder='Issue Number' onChange={(e,{value}) => setIssueNumber(value)}/>
-                    </Form.Group>
+                {type === 'Online' ?
+                    <Form.Field control={Input} label='URL' placeholder='URL' onChange={(e,{value}) => setUrl(value)}/>
                     : null}
                 <Form.Field
                     control={Input}
