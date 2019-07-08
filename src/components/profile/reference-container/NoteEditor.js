@@ -97,13 +97,12 @@ class NoteEditor extends Component {
         return (
             <div>
                 <Menu className='editor-toolbar'>
-                    <Menu.Item>
-                        <Dropdown
-                            text='Header'
-                            onChange={(e, {value}) => this.setBlockType(value)}
-                            options={headerOptions}
-                        />
-                    </Menu.Item>
+                    <Dropdown
+                        text='Header'
+                        item
+                        onChange={(e, {value}) => this.setBlockType(value)}
+                        options={headerOptions}
+                    />
                     <Menu.Item>
                         <Button.Group>
                             <Button onClick={() => this.setStyle("BOLD")} icon='bold' />
@@ -117,7 +116,7 @@ class NoteEditor extends Component {
                             <Button onClick={() => this.setBlockType('ordered-list-item')} icon='list ol'/>
                         </Button.Group>
                     </Menu.Item>
-                    <Menu.Item>
+                    <Menu.Item position='right'>
                         <Button.Group>
                             <RenameNoteModal note={note} name={name} />
                             <Button onClick={this.saveNote} icon='save outline'/>

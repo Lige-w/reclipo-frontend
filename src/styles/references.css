@@ -28,8 +28,3 @@ div.ui.bottom.attached.segment.active.tab {
 .editor-container {
     padding: 20px;
 }
-
-.ui.dropdown .menu {
-    right: 0;
-    left: auto;
-}

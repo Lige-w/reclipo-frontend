@@ -21,6 +21,6 @@ const ProjectReferences = ({match, requestProjectDetails, references}) => {
 }
 
 export default connect(
-    state => ({currentProject: state.currentProject, references: state.references}),
+    state => ({references: state.references}),
     {requestProjectDetails}
     )(ProjectReferences)
