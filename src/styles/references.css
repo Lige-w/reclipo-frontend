@@ -21,12 +21,11 @@ div.ui.bottom.attached.segment.active.tab {
     padding: 0;
 }
 
-.editor-toolbar {
-    background: #BBBBBB;
-    padding: 0 5px;
+.editor-toolbar.menu {
+    margin: 0
 }
 
-.DraftEditor-editorContainer {
+.editor-container {
     padding: 20px;
 }
 

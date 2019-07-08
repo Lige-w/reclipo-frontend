@@ -1,14 +1,15 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 import {Editor, EditorState, RichUtils, convertToRaw, convertFromRaw} from 'draft-js'
-import {Button, Dropdown} from "semantic-ui-react";
+import {Button, Dropdown, Icon, Menu} from "semantic-ui-react";
 import 'draft-js/dist/Draft.css'
 
-import {updateNoteContent, requestDeleteNote} from "../../../redux/actions/noteActions";
+import {updateNoteContent} from "../../../redux/actions/noteActions";
 import {authPatchFetch, NOTES_URL} from "../../../helpers/fetch";
 import {headerOptions} from "../../../helpers/editorData";
 
 import DeleteNoteModal from './DeleteNoteModal'
+import RenameNoteModal from './RenameNoteModal'
 
 class NoteEditor extends Component {
     constructor(props) {
@@ -56,8 +57,6 @@ class NoteEditor extends Component {
         }
     }
 
-
-
     onTab = (e) => {
         e.preventDefault()
         const newState = RichUtils.onTab(e, this.state.editorState, 4)
@@ -85,7 +84,6 @@ class NoteEditor extends Component {
     }
 
     setStyle = (style) => {
-        this.editor.focus()
         this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, style))
     }
 
@@ -98,37 +96,52 @@ class NoteEditor extends Component {
         const {name, note} = this.props
         return (
             <div>
-                <div className='editor-toolbar'>
-                    <Dropdown onChange={(e, {value}) => this.setBlockType(value)} defaultValue='unstyled' options={headerOptions} />
-                    <Button.Group>
-                        <Button onClick={() => this.setStyle("BOLD")} icon='bold' />
-                        <Button onClick={() => this.setStyle("ITALIC")} icon='italic' />
-                        <Button onClick={() => this.setStyle("UNDERLINE")} icon='underline' />
-                    </Button.Group>
-                    <Button.Group>
-                        <Button onClick={() => this.setBlockType("unordered-list-item")} icon='list ul'/>
-                        <Button onClick={() => this.setBlockType('ordered-list-item')} icon='list ol'/>
-                    </Button.Group>
-                    <Button.Group>
-                        <Button onClick={this.saveNote} icon='save outline'/>
-                        <DeleteNoteModal note={note} name={name} />
-                    </Button.Group>
+                <Menu className='editor-toolbar'>
+                    <Menu.Item>
+                        <Dropdown
+                            text='Header'
+                            onChange={(e, {value}) => this.setBlockType(value)}
+                            options={headerOptions}
+                        />
+                    </Menu.Item>
+                    <Menu.Item>
+                        <Button.Group>
+                            <Button onClick={() => this.setStyle("BOLD")} icon='bold' />
+                            <Button onClick={() => this.setStyle("ITALIC")} icon='italic' />
+                            <Button onClick={() => this.setStyle("UNDERLINE")} icon='underline' />
+                        </Button.Group>
+                    </Menu.Item>
+                    <Menu.Item>
+                        <Button.Group>
+                            <Button onClick={() => this.setBlockType("unordered-list-item")} icon='list ul'/>
+                            <Button onClick={() => this.setBlockType('ordered-list-item')} icon='list ol'/>
+                        </Button.Group>
+                    </Menu.Item>
+                    <Menu.Item>
+                        <Button.Group>
+                            <RenameNoteModal note={note} name={name} />
+                            <Button onClick={this.saveNote} icon='save outline'/>
+                            <DeleteNoteModal note={note} name={name} />
+                        </Button.Group>
+                    </Menu.Item>
+                </Menu>
+                <div onClick={() => this.editor.focus()} className="editor-container">
+                    <Editor
+                        editorState={editorState}
+                        onChange={this.onChange}
+                        handleKeyCommand={this.handleKeyCommand}
+                        // blockRendererFn={myBlockRendererFn}
+                        // blockStyleFn={}
+                        // keyBindingFn={}
+                        // handleReturn={this.handleReturn}
+                        readOnly={false}
+                        // spellCheck={true}
+                        stripPastedStyles={false}
+                        // blockRenderMap={}
+                        onTab={this.onTab}
+                        ref={(editor) => { this.editor = editor; }}
+                    />
                 </div>
-                <Editor
-                    editorState={editorState}
-                    onChange={this.onChange}
-                    handleKeyCommand={this.handleKeyCommand}
-                    // blockRendererFn={myBlockRendererFn}
-                    // blockStyleFn={}
-                    // keyBindingFn={}
-                    handleReturn={this.handleReturn}
-                    readOnly={false}
-                    // spellCheck={true}
-                    stripPastedStyles={false}
-                    // blockRenderMap={}
-                    onTab={this.onTab}
-                    ref={(editor) => { this.editor = editor; }}
-                />
             </div>
         )
     }
