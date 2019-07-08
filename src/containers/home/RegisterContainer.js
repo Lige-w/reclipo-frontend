@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 import RegisterForm from '../../components/home/RegisterForm'
 import {Link} from "react-router-dom";

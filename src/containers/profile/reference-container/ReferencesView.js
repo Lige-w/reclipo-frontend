@@ -1,9 +1,9 @@
 import React from 'react'
 import {Route, Switch, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
+
 import UserReferences from './UserReferences'
 import ProjectReferences from './ProjectReferences'
-import NewReference from "./ReferencesContainer";
 
 import '../../../styles/references.css'
 

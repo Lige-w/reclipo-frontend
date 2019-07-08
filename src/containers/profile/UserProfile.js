@@ -1,6 +1,4 @@
 import React from 'react'
-import {connect} from "react-redux";
-
 
 import ProjectsController from './ProjectsController'
 import ReferencesContainer from './reference-container/ReferencesContainer'

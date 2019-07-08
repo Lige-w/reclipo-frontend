@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Form, Select, Input, Button} from "semantic-ui-react";
+import {Form, Select, Input, Button, Icon} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {
     referenceTypes,
@@ -175,6 +175,7 @@ const ReferenceForm = (
     return(
         <div id='reference-form'>
             <Form  onSubmit={submitReference}>
+            <Icon onClick={()=>{setIsShowingRefForm(false)}} className='float-right' size='large' name='delete' />
                 <Form.Group>
                     <Form.Field
                         control={Select}

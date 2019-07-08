@@ -1,10 +1,10 @@
 import React from 'react'
 import {Icon} from "semantic-ui-react";
 import {connect} from "react-redux";
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link, withRouter} from 'react-router-dom'
 import {logout} from "../../redux/actions/userActions";
 
-const UserController = ({logout}) => {
+const UserController = ({logout, match}) => {
     const handleLogout = () => {
         logout()
         return <Redirect to='/' />
@@ -12,9 +12,10 @@ const UserController = ({logout}) => {
 
     return (
         <div id="user-controller">
+            <Link to={match.path}><Icon name='home'/> Home</Link>
             <div id='logout' onClick={handleLogout}><Icon name='sign out'/> <strong>Log Out</strong></div>
         </div>
     )
 }
 
-export default connect(null, {logout})(UserController)
+export default withRouter(connect(null, {logout})(UserController))

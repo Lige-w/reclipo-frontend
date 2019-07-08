@@ -1,5 +1,4 @@
 import {authGetFetch ,authPostFetch, authDeleteFetch, authPatchFetch, REFERENCES_URL} from "../../helpers/fetch";
-import {setCurrentProject} from "./projectActions";
 
 const requestGetUserReferences = () => {
     return dispatch => {

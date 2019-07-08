@@ -1,6 +1,4 @@
-import React, {useState, useEffect} from 'react'
-import {connect} from "react-redux";
-import {Button, Icon, Tab, Dropdown} from "semantic-ui-react";
+import React from 'react'
 
 import NotesContainer from '../../../containers/profile/reference-container/NotesContainer'
 import ReferenceControls from './ReferenceControls'

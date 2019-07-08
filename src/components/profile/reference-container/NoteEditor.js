@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 import {Editor, EditorState, RichUtils, convertToRaw, convertFromRaw} from 'draft-js'
-import {Icon, Button, Dropdown, Label} from "semantic-ui-react";
+import {Button, Dropdown} from "semantic-ui-react";
 import 'draft-js/dist/Draft.css'
 
 import {updateNoteContent, requestDeleteNote} from "../../../redux/actions/noteActions";
@@ -95,7 +95,6 @@ class NoteEditor extends Component {
     }
 
     render() {
-        const {note: {id, name, content} } = this.props
         const {editorState} = this.state
         return (
             <div>

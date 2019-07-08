@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-import {Route, Link} from "react-router-dom";
 
 import {requestUserProjects} from "../../redux/actions/projectActions";
 
