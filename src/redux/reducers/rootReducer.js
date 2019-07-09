@@ -5,6 +5,7 @@ import {currentProjectReducer} from "./currentProjectReducer";
 import {isShowingRefForm} from "./isShowingRefForm";
 import {refToEditReducer} from "./refToEditReducer";
 import {referencesReducer} from "./referencesReducer";
+import {tagsReducer} from "./tagsReducer";
 import {filterTagsReducer} from "./filterTagsReducer";
 
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     isShowingRefForm: isShowingRefForm,
     refToEdit: refToEditReducer,
     references: referencesReducer,
+    tags: tagsReducer,
     filterTags: filterTagsReducer
 })
 

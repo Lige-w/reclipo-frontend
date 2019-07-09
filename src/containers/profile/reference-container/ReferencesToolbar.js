@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import {Icon, Dropdown, Menu} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {setIsShowingRefForm, setRefToEdit} from "../../../redux/actions/referenceActions";
-import {requestGetUserTags} from "../../../redux/actions/tagActions";
+import {requestGetUserTags, setFilterTags} from "../../../redux/actions/tagActions";
 
 const ReferencesToolbar = ({
                                setIsShowingRefForm,
@@ -11,12 +11,13 @@ const ReferencesToolbar = ({
                                currentProject,
                                user,
                                requestGetUserTags,
-                               filterTags
+                               tags,
+                               setFilterTags,
                            }) => {
 
     useEffect(() =>{requestGetUserTags()}, [])
 
-    const tagOptions = filterTags.map(tag => ({
+    const tagOptions = tags.map(tag => ({
         key: tag.id,
         text: tag.name,
         value: tag.id
@@ -37,6 +38,7 @@ const ReferencesToolbar = ({
                 <Icon name='filter' />
                 <Dropdown
                     text='Filter by tag'
+                    onChange={(e, {value}) => setFilterTags(value)}
                     labeled
                     selection
                     multiple
@@ -57,7 +59,7 @@ export default connect(
         isShowingRefForm: state.isShowingRefForm,
         currentProject: state.currentProject,
         user: state.user,
-        filterTags: state.filterTags
+        tags: state.tags
     }),
-    {setIsShowingRefForm, setRefToEdit, requestGetUserTags}
+    {setIsShowingRefForm, setRefToEdit, requestGetUserTags, setFilterTags}
 )(ReferencesToolbar)
