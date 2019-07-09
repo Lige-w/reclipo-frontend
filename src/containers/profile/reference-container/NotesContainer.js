@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState, useEffect} from 'react'
 import {connect} from "react-redux";
 import {Icon, Tab, Dropdown, Button} from "semantic-ui-react";
 
@@ -18,6 +18,7 @@ const NotesContainer = ({notes, referenceId, requestCreateNote}) => {
             content: JSON.stringify({})
         }
         requestCreateNote(body)
+        setIsShowingNotes(true)
     }
 
     const noteOptions = notes.map((note, i) => (

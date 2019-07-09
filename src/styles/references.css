@@ -1,6 +1,10 @@
 .reference {
     width: inherit;
-    border: solid 1px
+    margin: 0 auto 5px;
+    max-width: 850px;
+    border: solid 1px;
+    background: #F1F1F1;
+    box-shadow: 0 0 5px;
 }
 
 div.note-dropdown.ui.scrolling.dropdown {
@@ -42,3 +46,4 @@ div.ui.bottom.attached.segment.active.tab {
 .tags, .notes-container {
     margin: 5px;
 }
+
