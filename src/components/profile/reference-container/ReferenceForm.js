@@ -17,7 +17,6 @@ import AuthorFields from './AuthorFields'
 const ReferenceForm = (
     {requestCreateReference, requestEditReference, currentProject, setIsShowingRefForm, refToEdit, projects}
 ) => {
-
     const [type, setType] = useState(referenceTypes[0])
     const [medium, setMedium] = useState(null)
     const [numberOfAuthors, setNumberOfAuthors] = useState(1)
@@ -34,7 +33,6 @@ const ReferenceForm = (
     const [issueNumber, setIssueNumber] = useState('')
     const [tags, setTags] = useState('')
     const [projectIds, setProjectIds] = useState([])
-    const [journal, setJournal] = useState('')
 
     useEffect(() => {
         if (refToEdit) {
@@ -122,7 +120,6 @@ const ReferenceForm = (
                 medium,
                 authors_attributes,
                 title,
-                journal,
                 publish_date: datePublished,
                 publisher_location: publisherLocation,
                 publisher,
