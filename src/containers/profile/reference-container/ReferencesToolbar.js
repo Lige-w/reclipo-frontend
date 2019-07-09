@@ -4,11 +4,24 @@ import {connect} from "react-redux";
 import {setIsShowingRefForm, setRefToEdit} from "../../../redux/actions/referenceActions";
 import {requestGetUserTags} from "../../../redux/actions/tagActions";
 
-const ReferencesToolbar = ({setIsShowingRefForm, isShowingRefForm, setRefToEdit, currentProject, user}) => {
+const ReferencesToolbar = ({
+                               setIsShowingRefForm,
+                               isShowingRefForm,
+                               setRefToEdit,
+                               currentProject,
+                               user,
+                               requestGetUserTags,
+                               filterTags
+                           }) => {
 
-    useEffect(() => requestGetUserTags(), [])
+    useEffect(() =>{requestGetUserTags()}, [])
 
-    const tagOptions = []
+    const tagOptions = filterTags.map(tag => ({
+        key: tag.id,
+        text: tag.name,
+        value: tag.id
+    }))
+
     return (
         <Menu id="resources-controller">
             <Menu.Item>
@@ -21,7 +34,7 @@ const ReferencesToolbar = ({setIsShowingRefForm, isShowingRefForm, setRefToEdit,
             </span>
             </Menu.Item>
             <Menu.Item>
-            <Icon name='filter' />
+                <Icon name='filter' />
                 <Dropdown
                     text='Filter by tag'
                     labeled
@@ -33,7 +46,7 @@ const ReferencesToolbar = ({setIsShowingRefForm, isShowingRefForm, setRefToEdit,
                 />
             </Menu.Item>
             <Menu.Item position='right'>
-            <span><strong>{currentProject ? currentProject.title : user.username}</strong></span>
+                <span><strong>{currentProject ? currentProject.title : user.username}</strong></span>
             </Menu.Item>
         </Menu>
     )
@@ -44,6 +57,7 @@ export default connect(
         isShowingRefForm: state.isShowingRefForm,
         currentProject: state.currentProject,
         user: state.user,
+        filterTags: state.filterTags
     }),
-    {setIsShowingRefForm, setRefToEdit}
+    {setIsShowingRefForm, setRefToEdit, requestGetUserTags}
 )(ReferencesToolbar)
