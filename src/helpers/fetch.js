@@ -6,6 +6,7 @@ const USERS_URL = URL + 'users/'
 const PROJECTS_URL = URL + 'projects/'
 const REFERENCES_URL = URL + 'references/'
 const NOTES_URL = URL + 'notes/'
+const TAGS_URL = URL + 'tags/'
 
 
 const token = () => localStorage.getItem('token')
@@ -81,6 +82,7 @@ export {
     PROJECTS_URL,
     REFERENCES_URL,
     NOTES_URL,
+    TAGS_URL,
     postFetch,
     authGetFetch,
     authPostFetch,
