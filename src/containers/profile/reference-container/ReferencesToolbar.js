@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {Icon, Dropdown} from "semantic-ui-react";
+import {Icon, Dropdown, Menu} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {setIsShowingRefForm, setRefToEdit} from "../../../redux/actions/referenceActions";
 import {requestGetUserTags} from "../../../redux/actions/tagActions";
@@ -10,7 +10,8 @@ const ReferencesToolbar = ({setIsShowingRefForm, isShowingRefForm, setRefToEdit,
 
     const tagOptions = []
     return (
-        <div id="resources-controller">
+        <Menu id="resources-controller">
+            <Menu.Item>
             <span className='controller-link'
                   onClick={() => {
                       setIsShowingRefForm(!isShowingRefForm)
@@ -18,19 +19,23 @@ const ReferencesToolbar = ({setIsShowingRefForm, isShowingRefForm, setRefToEdit,
                   }}>
                 <Icon name='file'/> <strong>{isShowingRefForm ? 'Close Form' : "Add a reference"}</strong>
             </span>
-            <span>
-                Filter by tag:
+            </Menu.Item>
+            <Menu.Item>
+            <Icon name='filter' />
                 <Dropdown
-                    placeholder='State'
-                    fluid
-                    multiple
-                    search
+                    text='Filter by tag'
+                    labeled
                     selection
+                    multiple
+                    floating
+                    search
                     options={tagOptions}
                 />
-            </span>
-            <span className='float-right'><strong>{currentProject ? currentProject.title : user.username}</strong></span>
-        </div>
+            </Menu.Item>
+            <Menu.Item position='right'>
+            <span><strong>{currentProject ? currentProject.title : user.username}</strong></span>
+            </Menu.Item>
+        </Menu>
     )
 }
 

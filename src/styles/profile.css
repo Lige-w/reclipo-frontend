@@ -42,10 +42,19 @@
 }
 
 #resources-controller {
+    border-radius: 0;
     padding: 5px;
     background: #3E3E3E;
     border-bottom: 1px solid #6A6A6A;
+    margin: 0;
+}
+
+#resources-controller * {
     color: #D5D5D5;
+}
+
+#resources-controller.ui.menu .item:before {
+    background: #666666;
 }
 
 #user-controller {
