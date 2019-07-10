@@ -1,8 +1,9 @@
 import {authGetFetch ,authPostFetch, authDeleteFetch, authPatchFetch, REFERENCES_URL} from "../../helpers/fetch";
 
-const requestGetUserReferences = () => {
+const requestGetUserReferences = (tags) => {
+    const queryParams = tags.map(tag => `tag_ids[]=${tag}`).join('&')
     return dispatch => {
-        return authGetFetch(REFERENCES_URL)
+        return authGetFetch(`${REFERENCES_URL}?${queryParams}`)
             .then(references => dispatch(setReferences(references)))
     }
 }
@@ -18,7 +19,7 @@ const requestCreateReference = (body) => {
 
 const requestEditReference = (body) => {
     return dispatch => {
-        return authPatchFetch(REFERENCES_URL + body.reference.id, body)
+        return authPatchFetch(`${REFERENCES_URL}/${body.reference.id}` , body)
             .then(reference => {
                 setRefToEdit(null)
                 return dispatch(updateReference(reference))
@@ -28,7 +29,7 @@ const requestEditReference = (body) => {
 
 const requestDeleteReference = (id) => {
     return dispatch => {
-        return authDeleteFetch(REFERENCES_URL + id)
+        return authDeleteFetch(`${REFERENCES_URL}/${id}`)
             .then(data => dispatch(deleteReference(id)))
     }
 }

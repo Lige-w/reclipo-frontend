@@ -4,7 +4,7 @@ const LOGIN_URL = URL + 'login/'
 const AUTH_URL = URL + 'profile/'
 const USERS_URL = URL + 'users/'
 const PROJECTS_URL = URL + 'projects/'
-const REFERENCES_URL = URL + 'references/'
+const REFERENCES_URL = URL + 'references'
 const NOTES_URL = URL + 'notes/'
 const TAGS_URL = URL + 'tags/'
 
