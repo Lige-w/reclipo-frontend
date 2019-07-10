@@ -4,7 +4,7 @@ import {Editor, EditorState, RichUtils, convertToRaw, convertFromRaw} from 'draf
 import {Button, Dropdown, Icon, Menu} from "semantic-ui-react";
 import 'draft-js/dist/Draft.css'
 
-// import createStyles from 'draft-js-custom-styles'
+import createStyles from 'draft-js-custom-styles'
 
 import {updateNoteContent, requestUpdateNoteContent} from "../../../redux/actions/noteActions";
 import {headerOptions, styleMap} from "../../../helpers/editorData";
@@ -12,7 +12,7 @@ import {headerOptions, styleMap} from "../../../helpers/editorData";
 import DeleteNoteModal from './DeleteNoteModal'
 import RenameNoteModal from './RenameNoteModal'
 
-// const {styles, customStyleFn} = createStyles(['font-size'], 'CUSTOM_', styleMap)
+const {styles, customStyleFn} = createStyles(['font-size'], 'CUSTOM_', styleMap)
 
 class NoteEditor extends Component {
     constructor(props) {
@@ -110,14 +110,16 @@ class NoteEditor extends Component {
         this.onChange(RichUtils.toggleBlockType(this.state.editorState, type))
     }
 
-    // toggleFontSize = size => {
-    //     this.onChange(styles.fontSize.add(this.state.editorState, size))
-    // }
+    toggleFontSize = (e, size) => {
+        e.preventDefault()
+        this.onChange(styles.fontSize.toggle(this.state.editorState, size))
+    }
 
 
     render() {
         const {editorState} = this.state
         const {name, note} = this.props
+
         return (
             <div>
                 <Menu className='editor-toolbar'>
@@ -139,6 +141,23 @@ class NoteEditor extends Component {
                         </Button.Group>
                     </Menu.Item>
                     <Menu.Item>
+                        <Dropdown text='Font Size' onMouseDown={e => e.preventDefault()}>
+                            <Dropdown.Menu>
+                                <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '8px')} text='8' />
+                                <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '10px')} text='10' />
+                                <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '12px')} text='12' />
+                                <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '14px')} text='14' />
+                                <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '16px')} text='16' />
+                                <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '18px')} text='18' />
+                                <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '20px')} text='20' />
+                                <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '24px')} text='24' />
+                                <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '28px')} text='28' />
+                                <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '32px')} text='32' />
+                                <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '38px')} text='38' />
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Menu.Item>
+                    <Menu.Item>
                         <Button.Group>
                             <Button onMouseDown={(e) => {this.setBlockType(e, "unordered-list-item")}} icon='list ul'/>
                             <Button onMouseDown={(e) => {this.setBlockType(e, 'ordered-list-item')}} icon='list ol'/>
@@ -158,7 +177,7 @@ class NoteEditor extends Component {
                         onChange={this.onChange}
                         handleKeyCommand={this.handleKeyCommand}
                         customStyleMap={styleMap}
-                        // customStyleFn={customStyleFn}
+                        customStyleFn={customStyleFn}
                         // blockRendererFn={myBlockRendererFn}
                         // blockStyleFn={}
                         // keyBindingFn={}
