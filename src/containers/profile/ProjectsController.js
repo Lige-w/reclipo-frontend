@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 
 import {requestUserProjects} from "../../redux/actions/projectActions";
 
-import NewProject from '../../components/profile/NewProject'
 import OpenProject from '../../components/profile/OpenProject'
 
 const ProjectsController = ({projects, requestUserProjects}) => {
@@ -14,7 +13,6 @@ const ProjectsController = ({projects, requestUserProjects}) => {
 
     return (
         <div id="projects-controller">
-            <NewProject/>
             {openProjectComponents}
         </div>
     )

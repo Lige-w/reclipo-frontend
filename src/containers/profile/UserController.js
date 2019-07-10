@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {Redirect, Link, withRouter} from 'react-router-dom'
 import {logout} from "../../redux/actions/userActions";
 import {setCurrentProject} from "../../redux/actions/projectActions";
+import NewProject from "../../components/profile/NewProject";
 
 const UserController = ({logout, match, setCurrentProject}) => {
     const handleLogout = () => {
@@ -16,6 +17,7 @@ const UserController = ({logout, match, setCurrentProject}) => {
             <Link onClick={() => setCurrentProject(null)} to={match.path}>
                 <Icon name='home'/> <strong>Home</strong>
             </Link>
+            <NewProject/>
             <div className='controller-link' id='logout' onClick={handleLogout}>
                 <Icon name='sign out'/> <strong>Log Out</strong>
             </div>

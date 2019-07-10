@@ -5,7 +5,7 @@ import {Button, Dropdown, Icon, Menu} from "semantic-ui-react";
 import 'draft-js/dist/Draft.css'
 
 import {updateNoteContent, requestUpdateNoteContent} from "../../../redux/actions/noteActions";
-import {headerOptions} from "../../../helpers/editorData";
+import {headerOptions, styleMap} from "../../../helpers/editorData";
 
 import DeleteNoteModal from './DeleteNoteModal'
 import RenameNoteModal from './RenameNoteModal'
@@ -121,6 +121,7 @@ class NoteEditor extends Component {
                             <Button onClick={() => this.setStyle("BOLD")} icon='bold' />
                             <Button onClick={() => this.setStyle("ITALIC")} icon='italic' />
                             <Button onClick={() => this.setStyle("UNDERLINE")} icon='underline' />
+                            <Button onClick={() => this.setStyle("HIGHLIGHT")} icon='h square'/>
                         </Button.Group>
                     </Menu.Item>
                     <Menu.Item>
@@ -142,6 +143,7 @@ class NoteEditor extends Component {
                         editorState={editorState}
                         onChange={this.onChange}
                         handleKeyCommand={this.handleKeyCommand}
+                        customStyleMap={styleMap}
                         // blockRendererFn={myBlockRendererFn}
                         // blockStyleFn={}
                         // keyBindingFn={}

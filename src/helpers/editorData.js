@@ -28,4 +28,10 @@ const headerOptions = [
     }
 ]
 
-export {headerOptions}
+const styleMap = {
+    'HIGHLIGHT': {
+        backgroundColor: 'yellow'
+    },
+}
+
+export {headerOptions, styleMap}
