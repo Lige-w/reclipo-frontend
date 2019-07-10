@@ -23,7 +23,7 @@ const NotesContainer = ({notes, referenceId, requestCreateNote}) => {
     const noteOptions = notes.map((note, i) => (
         {
             key: note.id,
-            text: note.name || `Note ${i + 1}`,
+            text: note.name || `Untitled Note ${note.id}`,
             value: i
         }
     ))
