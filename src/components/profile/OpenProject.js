@@ -1,20 +1,23 @@
 import React from 'react'
 import {connect} from "react-redux";
-import {Icon} from "semantic-ui-react";
+import {Icon, Menu} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 
 import DeleteProjectModal from './DeleteProjectModal'
 
-const OpenProject =  ({project: {id, title, description}, username}) => {
+const OpenProject =  ({project: {id, title, description}, username, currentProject}) => {
+
     return (
-        <div className='controller-link'>
+        <Menu.Item className='projects controller-link'>
+            <div>
             <Link to={`/${username}/${id}_${title.toLowerCase().replace(/\s/g, '_')}`}>
-                <Icon name='folder'/>
+                <Icon name={`${currentProject ? currentProject.id === id? 'open': null : null} folder`}/>
                 <strong> {title}</strong>
             </Link>
-            <DeleteProjectModal title={title} id={id}/>
-        </div>
+
+            </div>
+        </Menu.Item>
     )
 }
 
-export default connect(state => ({username: state.user.username}))(OpenProject)
+export default connect(state => ({username: state.user.username, currentProject: state.currentProject}))(OpenProject)

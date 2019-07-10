@@ -15,7 +15,7 @@ const DeleteProjectModal = ({id, title, requestDeleteProject}) => {
         <Modal
             open={isShowingModal}
             onClose={()=> setIsShowingModal(false)}
-            trigger={<Icon onClick={() => setIsShowingModal(true)} className='float-right' name='delete'/>}
+            trigger={<span><Icon onClick={() => setIsShowingModal(true)} size="large" name='delete'/><strong>Delete Project</strong></span>}
             closeIcon
         >
             <Modal.Header>Delete Project</Modal.Header>

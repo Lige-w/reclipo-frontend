@@ -1,7 +1,8 @@
 #user-profile {
     display: grid;
-    grid-template-columns: 240px auto;
-    grid-template-rows: 85vh 15vh;
+    grid-template-columns: max-content auto;
+    grid-template-rows: auto max-content;
+    min-height: 300px;
     height: 100vh;
     width: 100vw;
 }
@@ -11,13 +12,16 @@
     color: #D5D5D5;
     border-right: 1px solid #000000;
     padding: 10px;
+    margin: 0;
+    max-width: 210px;
+    border-radius: 0;
 }
 
-#user-controller a ,#projects-controller a {
+#user-controller div .controller-link ,#projects-controller a {
    color: #D5D5D5;
 }
 
-#user-controller a:hover ,#projects-controller a:hover, .controller-link:hover {
+#user-controller div .controller-link:hover ,#projects-controller a:hover, .controller-link:hover {
     color: #AAAAAA;
     cursor: pointer;
 }
@@ -44,8 +48,8 @@
 #resources-controller {
     border-radius: 0;
     padding: 5px;
-    background: #3E3E3E;
-    border-bottom: 1px solid #6A6A6A;
+    background: #444444;
+    border-bottom: 1px solid #666666;
     margin: 0;
 }
 
@@ -62,6 +66,8 @@
 }
 
 #user-controller {
+    border-radius: 0;
+    margin: 0;
     border-top: 1px solid #666666;
     border-right: 1px solid #000000;
     background-color: #444444;
@@ -69,3 +75,18 @@
     padding: 10px;
 }
 
+.projects.controller-link a {
+    margin-right: 10px;
+}
+
+.projects.controller-link:after {
+    background: #FFFFFF
+}
+
+.show-note:hover {
+    cursor: pointer;
+}
+
+.project-title {
+
+}

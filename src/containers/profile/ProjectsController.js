@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
+import {Menu} from "semantic-ui-react";
 
 import {requestUserProjects} from "../../redux/actions/projectActions";
 
@@ -12,9 +13,9 @@ const ProjectsController = ({projects, requestUserProjects}) => {
     const openProjectComponents = projects.map(project => <OpenProject key={project.id} project={project} />)
 
     return (
-        <div id="projects-controller">
+        <Menu vertical id="projects-controller">
             {openProjectComponents}
-        </div>
+        </Menu>
     )
 }
 

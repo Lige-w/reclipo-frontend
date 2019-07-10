@@ -3,6 +3,7 @@ import {Icon, Dropdown, Menu} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {setIsShowingRefForm, setRefToEdit} from "../../../redux/actions/referenceActions";
 import {requestGetUserTags, setFilterTags} from "../../../redux/actions/tagActions";
+import DeleteProjectModal from "../../../components/profile/DeleteProjectModal";
 
 const ReferencesToolbar = ({
                                setIsShowingRefForm,
@@ -47,9 +48,16 @@ const ReferencesToolbar = ({
                     options={tagOptions}
                 />
             </Menu.Item>
-            <Menu.Item position='right'>
-                <span><strong>{currentProject ? currentProject.title : user.username}</strong></span>
-            </Menu.Item>
+            <Menu.Menu position='right'>
+                {currentProject ?
+                    <Menu.Item>
+                        <DeleteProjectModal title={currentProject.title} id={currentProject.id}/>
+                    </Menu.Item>
+                    : null}
+                <Menu.Item className='project-title' >
+                    <span><strong>{currentProject ? currentProject.title : user.username}</strong></span>
+                </Menu.Item>
+            </Menu.Menu>
         </Menu>
     )
 }
