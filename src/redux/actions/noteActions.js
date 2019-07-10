@@ -31,7 +31,7 @@ const addNoteToReference = (note) => ({
 })
 
 const updateNoteContent = (note) => ({
-    type: 'UPDATE_NOTE', note
+    type: 'UPDATE_NOTE_CONTENT', note
 })
 
 const updateNote = (note) => ({
