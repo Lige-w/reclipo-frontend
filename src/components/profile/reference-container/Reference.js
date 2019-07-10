@@ -13,13 +13,9 @@ const Reference = ({requestCreateNote, reference, reference: {
     notes
 }}) => {
 
-
-
-
-
     const tagsElement = tags.map(tag => tag.name).join(', ')
 
-
+    const sortedNotes = notes.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at))
 
 
     return (
@@ -29,7 +25,7 @@ const Reference = ({requestCreateNote, reference, reference: {
             <div className="reference-details">
                 <Citation reference={reference}/>
             </div>
-            <NotesContainer referenceId={id} notes={notes}/>
+            <NotesContainer referenceId={id} notes={sortedNotes}/>
             <div className='tags'><strong>Tags: </strong>{tagsElement}</div>
         </div>
     )

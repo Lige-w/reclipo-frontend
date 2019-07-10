@@ -4,8 +4,7 @@ import {Editor, EditorState, RichUtils, convertToRaw, convertFromRaw} from 'draf
 import {Button, Dropdown, Icon, Menu} from "semantic-ui-react";
 import 'draft-js/dist/Draft.css'
 
-import {updateNoteContent} from "../../../redux/actions/noteActions";
-import {authPatchFetch, NOTES_URL} from "../../../helpers/fetch";
+import {updateNoteContent, requestUpdateNoteContent} from "../../../redux/actions/noteActions";
 import {headerOptions} from "../../../helpers/editorData";
 
 import DeleteNoteModal from './DeleteNoteModal'
@@ -51,9 +50,9 @@ class NoteEditor extends Component {
     }
 
     saveNote = () => {
-        const {note} = this.props
+        const {note, requestUpdateNoteContent} = this.props
         if (note.content) {
-            authPatchFetch(NOTES_URL + note.id, {note: {name: note.name, content: note.content}})
+            requestUpdateNoteContent(note)
         }
     }
 
@@ -89,6 +88,20 @@ class NoteEditor extends Component {
 
     setBlockType = (type) => {
         this.onChange(RichUtils.toggleBlockType(this.state.editorState, type))
+    }
+
+    saveTime = () => {
+        const {updated_at} = this.props.note
+
+        const seconds = (Date.now() - Date.parse(updated_at)) / 1000
+
+        if (seconds < 60) {return 'less than a minute'}
+        const minutes = Math.round(seconds / 60)
+            if (minutes < 60) {return (minutes) + ' minutes'}
+        const hours = Math.round(minutes / 60)
+         if (hours < 24) {return (hours) + ' hours'}
+        const days = Math.round(hours / 24)
+        return days + ' days'
     }
 
     render() {
@@ -141,10 +154,11 @@ class NoteEditor extends Component {
                         ref={(editor) => { this.editor = editor; }}
                     />
                 </div>
+                <span className='save-time float-right'>Last saved {this.saveTime()} ago.</span>
             </div>
         )
     }
 
 }
 
-export default connect(null, {updateNoteContent})(NoteEditor)
+export default connect(null, {updateNoteContent, requestUpdateNoteContent})(NoteEditor)

@@ -11,7 +11,6 @@ const NotesContainer = ({notes, referenceId, requestCreateNote}) => {
     const [isShowingNotes, setIsShowingNotes] = useState(false)
     const [selectedNoteIndex, setSelectedNoteIndex] = useState(0)
 
-
     const createNote = () => {
         const body = {
             reference_id: referenceId,

@@ -10,17 +10,17 @@ const referencesReducer = (state=[], action) => {
         }
         case 'UPDATE_NOTE_CONTENT': {
             const stateCopy = [...state]
-            const note = stateCopy.find(reference => reference.id === action.note.reference_id)
+            let note = stateCopy.find(reference => reference.id === action.note.reference_id)
                 .notes.find(note => note.id === action.note.id)
             note.content = action.note.content
             return stateCopy
         }
-        case 'UPDATE_NOTE_NAME': {
+        case 'UPDATE_NOTE': {
             const stateCopy = [...state]
             const reference = stateCopy.find(reference => reference.id === action.note.reference_id)
             const notesCopy = [...reference.notes]
-            const note = reference.notes.find(note => note.id === action.note.id)
-            note.name = action.note.name
+            const noteIndex = reference.notes.find(note => note.id === action.note.id)
+            notesCopy.splice(noteIndex, 1, action.note)
             reference.notes = notesCopy
             return stateCopy
         }

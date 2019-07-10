@@ -10,7 +10,7 @@ const requestCreateNote = (body) => {
 const requestUpdateNoteName = (name, id) => (
     dispatch => {
         return authPatchFetch(NOTES_URL + id, {note: {name}})
-            .then(note => dispatch(updateNoteName(note)))
+            .then(note => dispatch(updateNote(note)))
     }
 )
 
@@ -21,16 +21,21 @@ const requestDeleteNote = (note) => (
     }
 )
 
+const requestUpdateNoteContent = ({content, id}) => (
+    dispatch => authPatchFetch(NOTES_URL + id, {note: {content}})
+        .then(note => dispatch(updateNote(note)))
+)
+
 const addNoteToReference = (note) => ({
     type: "ADD_NOTE_TO_REFERENCE", note
 })
 
 const updateNoteContent = (note) => ({
-    type: 'UPDATE_NOTE_CONTENT', note
+    type: 'UPDATE_NOTE', note
 })
 
-const updateNoteName = (note) => ({
-    type: 'UPDATE_NOTE_NAME', note
+const updateNote = (note) => ({
+    type: 'UPDATE_NOTE' , note
 })
 
 const deleteNote = (note) => ({
@@ -38,5 +43,5 @@ const deleteNote = (note) => ({
 })
 
 
-export {requestCreateNote, updateNoteContent, requestDeleteNote, requestUpdateNoteName}
+export {requestCreateNote, updateNoteContent, requestDeleteNote, requestUpdateNoteName, requestUpdateNoteContent}
 
