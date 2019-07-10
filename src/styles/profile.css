@@ -49,12 +49,16 @@
     margin: 0;
 }
 
-#resources-controller * {
+#resources-controller .item {
     color: #D5D5D5;
 }
 
 #resources-controller.ui.menu .item:before {
     background: #666666;
+}
+
+#resources-controller .item .dropdown {
+    max-width: 30vw;
 }
 
 #user-controller {
