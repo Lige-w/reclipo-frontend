@@ -25,7 +25,9 @@ div.ui.bottom.attached.segment.active.tab {
 }
 
 .editor-container {
-    padding: 20px;
+    padding: 40px;
+    max-height: 475px;
+    overflow-y: scroll;
 }
 
 .reference-header {

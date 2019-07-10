@@ -4,12 +4,17 @@ import {requestProjectDetails} from "../../../redux/actions/projectActions";
 
 import Reference from "../../../components/profile/reference-container/Reference"
 
-const ProjectReferences = ({match, requestProjectDetails, references}) => {
+const ProjectReferences = ({match, requestProjectDetails, references, filterTags}) => {
     const id = match.params.id.split('_')[0]
 
     useEffect(() => {requestProjectDetails(id)}, [match])
 
-    const referenceComponents = references.map(reference => (
+    const referenceComponents = references.filter(reference => {
+        return filterTags.every(tag => reference.tags.find(t => {
+            return t.id === tag
+        }))
+    })
+        .map(reference => (
         <Reference key={reference.id} reference={reference} />
     ))
 
@@ -21,6 +26,6 @@ const ProjectReferences = ({match, requestProjectDetails, references}) => {
 }
 
 export default connect(
-    state => ({references: state.references}),
+    state => ({references: state.references, filterTags: state.filterTags}),
     {requestProjectDetails}
     )(ProjectReferences)

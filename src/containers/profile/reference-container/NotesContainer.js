@@ -31,8 +31,8 @@ const NotesContainer = ({notes, referenceId, requestCreateNote}) => {
 
     const notePanes = notes.length < 6 ?
         notes.map((note , i)=> ({
-            menuItem: note.name || `Note ${i + 1}`, render: () => (
-                <Tab.Pane key={note.id}><NoteEditor name={note.name || `Note ${i + 1}`} note={note}/></Tab.Pane>
+            menuItem: note.name || `Untitled Note ${note.id}`, render: () => (
+                <Tab.Pane key={note.id}><NoteEditor name={note.name || `Untitled Note ${note.id}`} note={note}/></Tab.Pane>
             )
         }))
         :
@@ -41,7 +41,7 @@ const NotesContainer = ({notes, referenceId, requestCreateNote}) => {
                 scrolling
                 item
                 className='note-dropdown'
-                text={notes[selectedNoteIndex].name || `Note ${selectedNoteIndex + 1}`}
+                text={notes[selectedNoteIndex].name || `Untitled Note ${notes[selectedNoteIndex].id}`}
                 value={selectedNoteIndex}
                 onChange={(e, {value}) => setSelectedNoteIndex(value)}
                 options={noteOptions}
