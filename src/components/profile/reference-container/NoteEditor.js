@@ -4,11 +4,15 @@ import {Editor, EditorState, RichUtils, convertToRaw, convertFromRaw} from 'draf
 import {Button, Dropdown, Icon, Menu} from "semantic-ui-react";
 import 'draft-js/dist/Draft.css'
 
+// import createStyles from 'draft-js-custom-styles'
+
 import {updateNoteContent, requestUpdateNoteContent} from "../../../redux/actions/noteActions";
 import {headerOptions, styleMap} from "../../../helpers/editorData";
 
 import DeleteNoteModal from './DeleteNoteModal'
 import RenameNoteModal from './RenameNoteModal'
+
+// const {styles, customStyleFn} = createStyles(['font-size'], 'CUSTOM_', styleMap)
 
 class NoteEditor extends Component {
     constructor(props) {
@@ -42,6 +46,28 @@ class NoteEditor extends Component {
         }
     }
 
+    saveNote = () => {
+        const {note, requestUpdateNoteContent} = this.props
+        if (note.content) {
+            requestUpdateNoteContent(note)
+        }
+    }
+
+    lastSaved = () => {
+        const {updated_at} = this.props.note
+
+        const seconds = (Date.now() - Date.parse(updated_at)) / 1000
+
+        if (seconds < 60) {return 'less than a minute'}
+        const minutes = Math.round(seconds / 60)
+        if (minutes < 60) {return (minutes) + ' minutes'}
+        const hours = Math.round(minutes / 60)
+        if (hours < 24) {return (hours) + ' hours'}
+        const days = Math.round(hours / 24)
+        return days + ' days'
+    }
+
+
     onChange = (editorState) => {
         const {note, updateNoteContent} = this.props
         this.setState({editorState})
@@ -49,12 +75,6 @@ class NoteEditor extends Component {
         updateNoteContent({...note, content})
     }
 
-    saveNote = () => {
-        const {note, requestUpdateNoteContent} = this.props
-        if (note.content) {
-            requestUpdateNoteContent(note)
-        }
-    }
 
     onTab = (e) => {
         e.preventDefault()
@@ -67,9 +87,7 @@ class NoteEditor extends Component {
         }
     }
 
-    handleReturn = e => {
 
-    }
 
     handleKeyCommand = command => {
         const {editorState} = this.state
@@ -82,27 +100,20 @@ class NoteEditor extends Component {
         }
     }
 
-    setStyle = (style) => {
+    setStyle = (e, style) => {
+        e.preventDefault()
         this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, style))
     }
 
-    setBlockType = (type) => {
+    setBlockType = (e, type) => {
+        e.preventDefault()
         this.onChange(RichUtils.toggleBlockType(this.state.editorState, type))
     }
 
-    saveTime = () => {
-        const {updated_at} = this.props.note
+    // toggleFontSize = size => {
+    //     this.onChange(styles.fontSize.add(this.state.editorState, size))
+    // }
 
-        const seconds = (Date.now() - Date.parse(updated_at)) / 1000
-
-        if (seconds < 60) {return 'less than a minute'}
-        const minutes = Math.round(seconds / 60)
-            if (minutes < 60) {return (minutes) + ' minutes'}
-        const hours = Math.round(minutes / 60)
-         if (hours < 24) {return (hours) + ' hours'}
-        const days = Math.round(hours / 24)
-        return days + ' days'
-    }
 
     render() {
         const {editorState} = this.state
@@ -113,21 +124,24 @@ class NoteEditor extends Component {
                     <Dropdown
                         text='Header'
                         item
-                        onChange={(e, {value}) => this.setBlockType(value)}
+                        onChange={(e, {value}) => {
+                            e.preventDefault()
+                            this.setBlockType(value)}}
                         options={headerOptions}
                     />
                     <Menu.Item>
                         <Button.Group>
-                            <Button onClick={() => this.setStyle("BOLD")} icon='bold' />
-                            <Button onClick={() => this.setStyle("ITALIC")} icon='italic' />
-                            <Button onClick={() => this.setStyle("UNDERLINE")} icon='underline' />
-                            <Button onClick={() => this.setStyle("HIGHLIGHT")} icon='h square'/>
+                            <Button onMouseDown={(e) => {this.setStyle(e, "BOLD")
+                            }} icon='bold' />
+                            <Button onMouseDown={(e) => {this.setStyle(e, "ITALIC")}} icon='italic' />
+                            <Button onMouseDown={(e) => {this.setStyle(e, "UNDERLINE")}} icon='underline' />
+                            <Button onMouseDown={(e) => {this.setStyle(e, "HIGHLIGHT")}} icon='h square'/>
                         </Button.Group>
                     </Menu.Item>
                     <Menu.Item>
                         <Button.Group>
-                            <Button onClick={() => this.setBlockType("unordered-list-item")} icon='list ul'/>
-                            <Button onClick={() => this.setBlockType('ordered-list-item')} icon='list ol'/>
+                            <Button onMouseDown={(e) => {this.setBlockType(e, "unordered-list-item")}} icon='list ul'/>
+                            <Button onMouseDown={(e) => {this.setBlockType(e, 'ordered-list-item')}} icon='list ol'/>
                         </Button.Group>
                     </Menu.Item>
                     <Menu.Item position='right'>
@@ -144,6 +158,7 @@ class NoteEditor extends Component {
                         onChange={this.onChange}
                         handleKeyCommand={this.handleKeyCommand}
                         customStyleMap={styleMap}
+                        // customStyleFn={customStyleFn}
                         // blockRendererFn={myBlockRendererFn}
                         // blockStyleFn={}
                         // keyBindingFn={}
@@ -156,7 +171,7 @@ class NoteEditor extends Component {
                         ref={(editor) => { this.editor = editor; }}
                     />
                 </div>
-                <span className='save-time float-right'>Last saved {this.saveTime()} ago.</span>
+                <span className='save-time float-right'>Last saved {this.lastSaved()} ago.</span>
             </div>
         )
     }
