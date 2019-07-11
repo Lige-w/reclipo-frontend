@@ -12,6 +12,7 @@ const AuthorFields = ({authorsAttributes, setAuthorsAttributes, i, creatorType})
     return (
         <Form.Group key={`author-field-${i}`}>
             <Form.Field
+                width={6}
                 control={Input}
                 label={`${creatorType()}'s Last Name`}
                 placeholder={`${creatorType()}'s Last Name`}
@@ -20,6 +21,7 @@ const AuthorFields = ({authorsAttributes, setAuthorsAttributes, i, creatorType})
                 name='lastName'
             />
             <Form.Field
+                width={6}
                 control={Input}
                 label={`${creatorType()}'s First Name`}
                 placeholder={`${creatorType()}'s First Name`}
@@ -28,6 +30,7 @@ const AuthorFields = ({authorsAttributes, setAuthorsAttributes, i, creatorType})
                 name='firstName'
             />
             <Form.Field
+                width={5}
                 control={Input}
                 label={`${creatorType()}'s Middle Initial`}
                 placeholder={`${creatorType()}'s Middle Initial`}

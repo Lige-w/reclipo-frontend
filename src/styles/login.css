@@ -13,3 +13,18 @@
 .full-width-button {
     width: 100%;
 }
+
+div.logo .site-title {
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+.logo img {
+    height: 200px;
+    width: auto
+}
+
+.logo {
+
+    text-align: center;
+}

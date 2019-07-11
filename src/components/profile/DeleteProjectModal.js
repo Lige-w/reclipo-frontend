@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {connect} from "react-redux";
-import {Modal, Button, Icon} from "semantic-ui-react";
+import {Modal, Button, Icon, Menu} from "semantic-ui-react";
 import {requestDeleteProject} from "../../redux/actions/projectActions";
 
 const DeleteProjectModal = ({id, title, requestDeleteProject}) => {
@@ -15,7 +15,7 @@ const DeleteProjectModal = ({id, title, requestDeleteProject}) => {
         <Modal
             open={isShowingModal}
             onClose={()=> setIsShowingModal(false)}
-            trigger={<span><Icon onClick={() => setIsShowingModal(true)} size="large" name='delete'/><strong>Delete Project</strong></span>}
+            trigger={<Menu.Item onClick={() => setIsShowingModal(true)}><Icon  size="large" name='delete'/><strong>Delete Project</strong></Menu.Item>}
             closeIcon
         >
             <Modal.Header>Delete Project</Modal.Header>

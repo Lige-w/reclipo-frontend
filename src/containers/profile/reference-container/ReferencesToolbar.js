@@ -14,6 +14,7 @@ const ReferencesToolbar = ({
                                requestGetUserTags,
                                tags,
                                setFilterTags,
+                               projects
                            }) => {
 
     useEffect(() =>{requestGetUserTags()}, [])
@@ -26,14 +27,17 @@ const ReferencesToolbar = ({
 
     return (
         <Menu id="resources-controller">
+
             <Menu.Item>
-            <span className='controller-link'
-                  onClick={() => {
-                      setIsShowingRefForm(!isShowingRefForm)
-                      setRefToEdit(null)
-                  }}>
+                { projects.length?
+                    <span className='controller-link'
+                          onClick={() => {
+                              setIsShowingRefForm(!isShowingRefForm)
+                              setRefToEdit(null)
+                          }}>
                 <Icon name='file'/> <strong>{isShowingRefForm ? 'Close Form' : "Add a reference"}</strong>
-            </span>
+            </span> :
+                    null }
             </Menu.Item>
             <Menu.Item>
                 <Icon name='filter' />
@@ -50,9 +54,7 @@ const ReferencesToolbar = ({
             </Menu.Item>
             <Menu.Menu position='right'>
                 {currentProject ?
-                    <Menu.Item>
-                        <DeleteProjectModal title={currentProject.title} id={currentProject.id}/>
-                    </Menu.Item>
+                    <DeleteProjectModal title={currentProject.title} id={currentProject.id}/>
                     : null}
                 <Menu.Item className='project-title' >
                     <span><strong>{currentProject ? currentProject.title : user.username}</strong></span>
@@ -67,7 +69,8 @@ export default connect(
         isShowingRefForm: state.isShowingRefForm,
         currentProject: state.currentProject,
         user: state.user,
-        tags: state.tags
+        tags: state.tags,
+        projects: state.projects
     }),
     {setIsShowingRefForm, setRefToEdit, requestGetUserTags, setFilterTags}
 )(ReferencesToolbar)

@@ -1,5 +1,5 @@
 import {PROJECTS_URL, authPostFetch, authGetFetch, authDeleteFetch} from "../../helpers/fetch";
-import {setReferences} from "./referenceActions";
+import {setReferences} from "./referenceActions"
 
 const requestCreateProject = (body, setIsModalShowing) => {
     return dispatch => {
@@ -8,6 +8,7 @@ const requestCreateProject = (body, setIsModalShowing) => {
                 setIsModalShowing(false)
                 dispatch(addProject(project))
                 dispatch(setCurrentProject(project))
+
             })
     }
 }

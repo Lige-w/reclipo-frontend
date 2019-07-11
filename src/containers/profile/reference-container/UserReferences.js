@@ -17,6 +17,7 @@ const UserReferences = ({references, requestGetUserReferences, filterTags}) => {
 
     return (
         <div className='resources'>
+
             {referenceComponents}
         </div>
     )

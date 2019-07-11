@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, Fragment} from 'react'
 import {Form, Select, Input, Button, Icon} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {
@@ -90,10 +90,9 @@ const ReferenceForm = (
         switch(medium) {
             case 'Film':
                 return 'Director'
-            case 'Song':
-                return 'Songwriter'
             case 'Edited Book':
-                return 'Editor'
+                return 'Editor/Author'
+            case 'Audio':
             case 'Video':
                 return 'Creator'
             default:
@@ -173,10 +172,11 @@ const ReferenceForm = (
 
     return(
         <div id='reference-form'>
-            <Form  onSubmit={submitReference}>
                 <Icon onClick={()=>{setIsShowingRefForm(false)}} className='float-right' size='large' name='delete' />
+            <Form  onSubmit={submitReference}>
                 <Form.Group>
                     <Form.Field
+                        width={6}
                         control={Select}
                         label='Type'
                         search
@@ -186,6 +186,7 @@ const ReferenceForm = (
                         options={typeOptions}
                     />
                     <Form.Field
+                        width={6}
                         control={Select}
                         label='Medium'
                         search
@@ -195,6 +196,7 @@ const ReferenceForm = (
                         options={mediumOptions}
                     />
                     <Form.Field
+                        width={6}
                         control={Input}
                         onChange={changeNumberOfAuthors}
                         label={`Number of ${creatorType()}s`}
@@ -205,48 +207,70 @@ const ReferenceForm = (
                     />
                 </Form.Group>
                 {authorsFields}
-                { medium === 'Journal' ?
-                    <Form.Group>
-                        <Form.Field
+                <Form.Group>
+                    { medium === 'Journal' || medium === 'Newspaper' || medium === 'Magazine' ?
+                        <Fragment>
+                            <Form.Field
+                                width={6}
+                                fluid
+                                control={Input}
+                                label='Article Title'
+                                placeholder='Article Title'
+                                onChange={(e, {value}) => setTitle(value)}
+                                value={title}
+                            />
+                            <Form.Field
+                                width={6}
+                                fluid
+                                control={Input}
+                                label={medium}
+                                placeholder={medium}
+                                onChange={(e, {value}) => setPublisher(value)}
+                                value={publisher}
+                            />
+                        </Fragment>
+                        : <Form.Field
+                            width={12}
                             control={Input}
-                            label='Article Title'
-                            placeholder='Article Title'
+                            multiple
+                            label="Title"
+                            placeholder="Title"
                             onChange={(e, {value}) => setTitle(value)}
                             value={title}
                         />
-                        <Form.Field
-                            control={Input}
-                            label='Journal'
-                            placeholder='Journal'
-                            onChange={(e, {value}) => setPublisher(value)}
-                            value={publisher}
-                        />
-                    </Form.Group>
-                    : <Form.Field
+                    }
+                    < Form.Field
+                        width={4}
                         control={Input}
-                        multiple
-                        label="Title"
-                        placeholder="Title"
-                        onChange={(e, {value}) => setTitle(value)}
-                        value={title}
+                        label="Date Published"
+                        placeholder="Date Published" type='date'
+                        onChange={(e,{value}) => setDatePublished(value)}
+                        value={datePublished}
                     />
-                }
-                < Form.Field
-                    control={Input}
-                    label="Date Published"
-                    placeholder="Date Published" type='date'
-                    onChange={(e,{value}) => setDatePublished(value)}
-                    value={datePublished}
-                />
+                </Form.Group>
+                <Form.Group>
                 {['Journal', 'Magazine', 'Newspaper'].includes(medium) ?
-                    <Form.Group>
-                        <Form.Field control={Input} label='Volume Number' placeholder='Volume Number'  onChange={(e,{value}) => setVolumeNumber(value)}/>
-                        <Form.Field control={Input} label='Issue Number' placeholder='Issue Number' onChange={(e,{value}) => setIssueNumber(value)}/>
-                    </Form.Group>
+                    <Fragment>
+                        <Form.Field
+                            width={8}
+                            control={Input}
+                            label='Volume Number'
+                            placeholder='Volume Number'
+                            onChange={(e,{value}) => setVolumeNumber(value)}
+                        />
+                        <Form.Field
+                            width={8}
+                            control={Input}
+                            label='Issue Number'
+                            placeholder='Issue Number'
+                            onChange={(e,{value}) => setIssueNumber(value)}
+                        />
+                    </Fragment>
                     : null}
                 { medium === 'Book' ?
-                    <Form.Group>
+                    <Fragment>
                         <Form.Field
+                            width={8}
                             control={Input}
                             label='Publisher Location'
                             placeholder='Publisher Location'
@@ -254,15 +278,17 @@ const ReferenceForm = (
                             value={publisherLocation}
                         />
                         < Form.Field
+                            width={8}
                             control={Input}
                             label='Publisher'
                             placeholder='Publisher'
                             onChange={(e,{value}) => setPublisher(value)}
                             value={publisher}
                         />
-                    </Form.Group>  : null
+                    </Fragment>  : null
                 }
-                {medium === ''}
+                </Form.Group>
+
                 {type === 'Print' || medium === 'Journal' ?
                     <Form.Field
                         control={Input}
@@ -285,7 +311,7 @@ const ReferenceForm = (
                 <Form.Field
                     control={Select}
                     multiple
-                    label='Project'
+                    label='Projects'
                     options={projectOptions}
                     value={projectIds}
                     onChange={(e, {value}) => setProjectIds(value)}

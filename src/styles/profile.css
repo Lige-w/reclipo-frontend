@@ -1,8 +1,9 @@
 #user-profile {
     display: grid;
     grid-template-columns: max-content auto;
-    grid-template-rows: auto max-content;
+    grid-template-rows: 89vh 11vh;
     min-height: 300px;
+    max-height: 100vh;
     height: 100vh;
     width: 100vw;
 }
@@ -10,7 +11,7 @@
 #projects-controller {
     background: #444444;
     color: #D5D5D5;
-    border-right: 1px solid #000000;
+    border-right: 1px solid #333333;
     padding: 10px;
     margin: 0;
     max-width: 210px;
@@ -29,8 +30,20 @@
 #reference-form {
     background: #F1F1F1;
     box-shadow: 0 5px 5px;
-    padding: 5px 10px;
+    padding: 15px 0 25px 25px;
     overflow-y: scroll;
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#reference-form::-webkit-scrollbar {width: 0 !important}
+
+#reference-form .form {
+    display: grid;
+    grid-template-columns: auto;
+    margin-top: 10px;
 }
 
 #resources-view {
@@ -68,8 +81,8 @@
 #user-controller {
     border-radius: 0;
     margin: 0;
-    border-top: 1px solid #666666;
-    border-right: 1px solid #000000;
+    border-top: 1px solid #333333;
+    border-right: 1px solid #333333;
     background-color: #444444;
     color: #D5D5D5;
     padding: 10px;
@@ -90,3 +103,11 @@
 .project-title {
 
 }
+
+#logo {
+    position: absolute;
+    left: 57%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
