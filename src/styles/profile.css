@@ -47,6 +47,8 @@
 }
 
 #resources-view {
+    position:relative;
+
     overflow-y: scroll;
 }
 
@@ -106,7 +108,7 @@
 
 #logo {
     position: absolute;
-    left: 57%;
+    left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
 }

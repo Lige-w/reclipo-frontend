@@ -12,7 +12,7 @@ import '../../../styles/references.css'
 const ReferencesView = ({user: {username}, references}) => {
     return (
         <div id="resources-view">
-            {!references.length ? <img id='logo' src={logo} /> : null}
+            <img id='logo' src={logo} />
             <Switch>
                 <Route exact path={`/${username}`} component={UserReferences}/>
                 <Route exact path={`/${username}/:id`} component={ProjectReferences}/>

@@ -1,4 +1,6 @@
 .reference {
+    z-index: 2;
+    position: relative;
     width: inherit;
     margin: 0 auto 5px;
     max-width: 850px;

@@ -19,7 +19,7 @@ const referencesReducer = (state=[], action) => {
             const stateCopy = [...state]
             const reference = stateCopy.find(reference => reference.id === action.note.reference_id)
             const notesCopy = [...reference.notes]
-            const noteIndex = reference.notes.find(note => note.id === action.note.id)
+            const noteIndex = reference.notes.findIndex(note => note.id === action.note.id)
             notesCopy.splice(noteIndex, 1, action.note)
             reference.notes = notesCopy
             return stateCopy
