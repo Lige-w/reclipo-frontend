@@ -9,6 +9,7 @@ const DeleteProjectModal = ({id, title, requestDeleteProject}) => {
     const deleteProject = () => {
         requestDeleteProject(id)
         setIsShowingModal(false)
+
     }
 
     return (

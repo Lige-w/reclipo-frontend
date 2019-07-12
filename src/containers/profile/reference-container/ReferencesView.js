@@ -2,17 +2,15 @@ import React from 'react'
 import {Route, Switch, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 
-import logo from '../../../assets/books-stack-of-three.svg'
-
 import UserReferences from './UserReferences'
 import ProjectReferences from './ProjectReferences'
 
 import '../../../styles/references.css'
 
-const ReferencesView = ({user: {username}, references}) => {
+const ReferencesView = ({user: {username}}) => {
     return (
         <div id="resources-view">
-            <img id='logo' src={logo} />
+
             <Switch>
                 <Route exact path={`/${username}`} component={UserReferences}/>
                 <Route exact path={`/${username}/:id`} component={ProjectReferences}/>

@@ -25,6 +25,7 @@ const referencesReducer = (state=[], action) => {
             return stateCopy
         }
         case 'ADD_REFERENCE': {
+            debugger
             return [...state, action.reference]
         }
         case 'UPDATE_REFERENCE': {

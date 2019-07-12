@@ -17,7 +17,9 @@ const ReferencesToolbar = ({
                                projects
                            }) => {
 
-    useEffect(() =>{requestGetUserTags()}, [])
+    useEffect(() =>{
+        requestGetUserTags()
+    }, [])
 
     const tagOptions = tags.map(tag => ({
         key: tag.id,
@@ -70,7 +72,8 @@ export default connect(
         currentProject: state.currentProject,
         user: state.user,
         tags: state.tags,
-        projects: state.projects
+        projects: state.projects,
+        references: state.references,
     }),
     {setIsShowingRefForm, setRefToEdit, requestGetUserTags, setFilterTags}
 )(ReferencesToolbar)

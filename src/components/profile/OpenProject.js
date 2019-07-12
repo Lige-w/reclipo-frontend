@@ -14,7 +14,7 @@ const OpenProject =  ({project: {id, title, description}, username, currentProje
         <Menu.Item className='projects controller-link'>
             <Popup trigger={
                 <Link to={`/${username}/${id}_${title.toLowerCase().replace(/\s/g, '_')}`}>
-                    <Icon name={`${currentProject ? currentProject.id === id ? 'open' : null : null} folder`}/>
+                    <Icon name={`${currentProject ? currentProject.id === id ? 'open ' : '' : ''}folder`}/>
                     <strong> {title}</strong>
                 </Link>
             }

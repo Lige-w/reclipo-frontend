@@ -2,11 +2,12 @@
     z-index: 2;
     position: relative;
     width: inherit;
-    margin: 0 auto 5px;
+    margin: 3px auto;
     max-width: 850px;
-    border: solid 1px;
     background: #F1F1F1;
-    box-shadow: 0 0 5px;
+    box-shadow: 0 0 5px #222222;
+    border-radius: 3px 3px;
+    overflow: hidden;
 }
 
 div.note-dropdown.ui.scrolling.dropdown {
@@ -50,4 +51,5 @@ div.ui.bottom.attached.segment.active.tab {
 .tags, .notes-container {
     margin: 5px;
 }
+
 

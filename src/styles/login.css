@@ -1,3 +1,7 @@
+* {
+
+}
+
 #login-container, #register-container {
     background: #F5F5EE;
     height: 100vh;
@@ -15,11 +19,14 @@
 }
 
 div.logo .site-title {
+    font-family: Geneva,Tahoma,Verdana,sans-serif;
     margin-top: 0;
     margin-bottom: 30px;
 }
 
 .logo img {
+    -webkit-filter: drop-shadow(1px 0 1px #222);
+    filter: drop-shadow(1px 0 1px #222);
     height: 200px;
     width: auto
 }
