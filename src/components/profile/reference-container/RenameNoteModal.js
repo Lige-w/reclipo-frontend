@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {connect} from "react-redux";
-import {Button, Modal, Input, Label} from "semantic-ui-react";
+import {Button, Modal, Input} from "semantic-ui-react";
 import {requestUpdateNoteName} from "../../../redux/actions/noteActions";
 
 const RenameNoteModal = ({note, requestUpdateNoteName}) => {

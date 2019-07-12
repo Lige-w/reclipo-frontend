@@ -6,7 +6,6 @@ import {
     AUTH_URL
 } from "../../helpers/fetch";
 
-
 const registerUser = (body) => (
     dispatch => (
         postFetch(USERS_URL, body)
@@ -32,6 +31,7 @@ const requestLogin = (body) => {
 
 const login = (user) => ({type: 'LOGIN', user })
 
-const logout = () => ({type: 'LOGOUT'})
-
+const logout = () => {
+    return {type: 'LOGOUT'}
+}
 export {registerUser, requestAuth, requestLogin, logout}

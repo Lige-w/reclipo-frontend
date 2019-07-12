@@ -6,8 +6,12 @@
     background: #F5F5EE;
     height: 100vh;
     width: 50vw;
-    padding: 50px
+    padding: 50px;
+    overflow-y: scroll;
 }
+
+#login-container::-webkit-scrollbar, #register-container::-webkit-scrollbar {width: 0 !important}
+
 
 #login-form-container {
     margin-bottom: 10px;

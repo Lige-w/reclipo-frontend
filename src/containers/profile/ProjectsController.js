@@ -15,7 +15,7 @@ const ProjectsController = ({projects, requestUserProjects}) => {
 
     return (
         <Menu vertical id="projects-controller">
-            <Menu.Item position='bottom' id='logo'>
+            <Menu.Item id='logo'>
                 <img  src={logo} />
                 <h1 className="logo-title">RePrO</h1>
             </Menu.Item>

@@ -10,6 +10,7 @@ const DeleteNoteModal = ({name, note, requestDeleteNote}) => {
     const deleteNote = () => {
         requestDeleteNote(note)
         setIsShowingModal(false)
+
     }
 
     return (

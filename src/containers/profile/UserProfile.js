@@ -10,9 +10,11 @@ const UserProfile = () => {
 
     return (
         <div id='user-profile'>
+            <div id='controllers'>
             <ProjectsController/>
-            <ReferencesContainer/>
             <UserController/>
+            </div>
+            <ReferencesContainer/>
         </div>
     )
 }

@@ -5,12 +5,12 @@ import {setIsShowingRefForm} from "../../../redux/actions/referenceActions";
 
 import Reference from "../../../components/profile/reference-container/Reference"
 
-const ProjectReferences = ({match, requestProjectDetails, references, filterTags, setIsShowingRefForm}) => {
+const ProjectReferences = ({match, requestProjectDetails, references, filterTags}) => {
     const id = match.params.id.split('_')[0]
 
     useEffect(() => {
         requestProjectDetails(id)
-    }, [match])
+    }, [id])
 
     const referenceComponents = references.filter(reference => {
         return filterTags.every(tag => reference.tags.find(t => {

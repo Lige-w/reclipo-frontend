@@ -9,6 +9,7 @@ import NewProject from "../../components/profile/NewProject";
 const UserController = ({logout, match, setCurrentProject}) => {
     const handleLogout = () => {
         logout()
+        setCurrentProject(null)
         return <Redirect to='/' />
     }
 

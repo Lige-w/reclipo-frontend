@@ -62,5 +62,6 @@ export {
     requestUserProjects,
     requestProjectDetails,
     setCurrentProject,
-    requestDeleteProject
+    requestDeleteProject,
+    unsetCurrentProject
 }

@@ -70,6 +70,16 @@ const Citation = ({reference: {
                     {url? `. Retrieved from ${url}` : null}
                 </span>
             )
+        default:
+            return (
+                <span>
+                    {authorElements}
+                    {publishDate? ` (${publishDate.split('-')[0]}). ` : null}
+                    <em>{title}.</em>
+                    {publisher? ` ${publisherLocation}: ${publisher}.` : null}
+                    {url? ` Retrieved from ${url}` : null}
+                </span>
+            )
     }
 }
 

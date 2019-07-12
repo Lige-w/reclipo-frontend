@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 import {Editor, EditorState, RichUtils, convertToRaw, convertFromRaw} from 'draft-js'
-import {Button, Dropdown, Icon, Menu} from "semantic-ui-react";
+import {Button, Dropdown, Menu} from "semantic-ui-react";
 import 'draft-js/dist/Draft.css'
 
 import createStyles from 'draft-js-custom-styles'
@@ -118,7 +118,7 @@ class NoteEditor extends Component {
 
     render() {
         const {editorState} = this.state
-        const {name, note} = this.props
+        const {name, note, setSelectedNoteIndex, selectedNoteIndex} = this.props
 
         return (
             <div>
@@ -183,7 +183,7 @@ class NoteEditor extends Component {
                         // keyBindingFn={}
                         // handleReturn={this.handleReturn}
                         readOnly={false}
-                        // spellCheck={true}
+                        spellCheck={true}
                         stripPastedStyles={false}
                         // blockRenderMap={}
                         onTab={this.onTab}

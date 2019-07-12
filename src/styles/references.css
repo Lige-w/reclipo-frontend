@@ -33,6 +33,8 @@ div.ui.bottom.attached.segment.active.tab {
     overflow-y: scroll;
 }
 
+.editor-container::-webkit-scrollbar {width: 0 !important}
+
 .reference-header {
     padding: 5px;
     background: #CECECE;

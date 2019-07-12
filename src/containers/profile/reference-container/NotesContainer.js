@@ -31,7 +31,7 @@ const NotesContainer = ({notes, referenceId, requestCreateNote}) => {
     const notePanes = notes.length < 6 ?
         notes.map((note , i)=> ({
             menuItem: note.name || `Untitled Note ${note.id}`, render: () => (
-                <Tab.Pane key={note.id}><NoteEditor name={note.name || `Untitled Note ${note.id}`} note={note}/></Tab.Pane>
+                <Tab.Pane key={note.id}><NoteEditor  name={note.name || `Untitled Note ${note.id}`} note={note}/></Tab.Pane>
             )
         }))
         :
@@ -46,7 +46,7 @@ const NotesContainer = ({notes, referenceId, requestCreateNote}) => {
                 options={noteOptions}
             />,
             render: () => <Tab.Pane>
-                <NoteEditor note={notes[selectedNoteIndex]}/>
+                <NoteEditor  note={notes[selectedNoteIndex]}/>
         </Tab.Pane>}]
 
     return (
