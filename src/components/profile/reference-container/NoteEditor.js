@@ -141,7 +141,7 @@ class NoteEditor extends Component {
                         </Button.Group>
                     </Menu.Item>
                     <Menu.Item>
-                        <Dropdown text='Font Size' onMouseDown={e => e.preventDefault()}>
+                        <Dropdown scrolling text='Font Size' onMouseDown={e => e.preventDefault()}>
                             <Dropdown.Menu>
                                 <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '8px')} text='8' />
                                 <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '10px')} text='10' />
@@ -154,6 +154,11 @@ class NoteEditor extends Component {
                                 <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '28px')} text='28' />
                                 <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '32px')} text='32' />
                                 <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '38px')} text='38' />
+                                <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '44px')} text='44' />
+                                <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '50px')} text='50' />
+                                <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '56px')} text='56' />
+                                <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '64px')} text='64' />
+                                <Dropdown.Item onMouseDown={e => this.toggleFontSize(e, '72px')} text='72' />
                             </Dropdown.Menu>
                         </Dropdown>
                     </Menu.Item>
