@@ -118,23 +118,26 @@ class NoteEditor extends Component {
 
     render() {
         const {editorState} = this.state
-        const {name, note, setSelectedNoteIndex, selectedNoteIndex} = this.props
-
+        const {name, note} = this.props
+        const headerOptionElements = headerOptions.map(({key, value, text}) => (
+            <Dropdown.Item key={key} onMouseDown={e => this.setBlockType(e, value)} text={text} />
+        ))
         return (
             <div>
                 <Menu className='editor-toolbar'>
-                    <Dropdown
-                        text='Header'
-                        item
-                        onChange={(e, {value}) => {
-                            e.preventDefault()
-                            this.setBlockType(value)}}
-                        options={headerOptions}
-                    />
+                    <Menu.Item>
+                        <Dropdown
+                            text='Header'
+                            onMouseDown={(e) => e.preventDefault()}
+                        >
+                            <Dropdown.Menu>
+                                {headerOptionElements}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Menu.Item>
                     <Menu.Item>
                         <Button.Group>
-                            <Button onMouseDown={(e) => {this.setStyle(e, "BOLD")
-                            }} icon='bold' />
+                            <Button onMouseDown={(e) => {this.setStyle(e, "BOLD")}} icon='bold' />
                             <Button onMouseDown={(e) => {this.setStyle(e, "ITALIC")}} icon='italic' />
                             <Button onMouseDown={(e) => {this.setStyle(e, "UNDERLINE")}} icon='underline' />
                             <Button onMouseDown={(e) => {this.setStyle(e, "HIGHLIGHT")}} icon='h square'/>
