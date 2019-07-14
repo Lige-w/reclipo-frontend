@@ -27,15 +27,15 @@ const RegisterForm = ({registerUser}) => {
                         placeholder='Username'
                     />
                 </Form.Field>
-                <Form.Field>
-                    <label>Email Address</label>
-                    <input
-                        onChange={(e)=>{setEmail(e.target.value)}}
-                        value={email}
-                        type="email"
-                        placeholder='Email Address'
-                    />
-                </Form.Field>
+                {/*<Form.Field>*/}
+                    {/*<label>Email Address</label>*/}
+                    {/*<input*/}
+                        {/*onChange={(e)=>{setEmail(e.target.value)}}*/}
+                        {/*value={email}*/}
+                        {/*type="email"*/}
+                        {/*placeholder='Email Address'*/}
+                    {/*/>*/}
+                {/*</Form.Field>*/}
                 <Form.Field>
                     <label>Password</label>
                     <input

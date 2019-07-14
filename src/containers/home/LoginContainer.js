@@ -14,7 +14,7 @@ const LoginContainer = () => {
                 <h1 className="site-title">RePrO</h1>
             </div>
             <LoginForm/>
-            <Link to='/password_reset'>Forgot Password?</Link>
+            {/*<Link to='/password_reset'>Forgot Password?</Link>*/}
             <Link className='float-right' to='/register'>Dont have an account yet? Register</Link>
         </div>
     )

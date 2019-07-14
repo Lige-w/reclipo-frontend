@@ -1,4 +1,4 @@
-const URL = 'http://localhost:3000/api/v1/'
+const URL = 'https://repro-db.herokuapp.com/api/v1/'
 
 const LOGIN_URL = URL + 'login/'
 const AUTH_URL = URL + 'profile/'

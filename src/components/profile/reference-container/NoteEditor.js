@@ -119,6 +119,7 @@ class NoteEditor extends Component {
     render() {
         const {editorState} = this.state
         const {name, note} = this.props
+
         const headerOptionElements = headerOptions.map(({key, value, text}) => (
             <Dropdown.Item key={key} onMouseDown={e => this.setBlockType(e, value)} text={text} />
         ))
