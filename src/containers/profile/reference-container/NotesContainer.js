@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useEffect} from 'react'
+import React, {Fragment, useState} from 'react'
 import {connect} from "react-redux";
 import {Icon, Tab, Dropdown, Button} from "semantic-ui-react";
 
@@ -29,7 +29,7 @@ const NotesContainer = ({notes, referenceId, requestCreateNote}) => {
     ))
 
     const notePanes = notes.length < 6 ?
-        notes.map((note , i)=> ({
+        notes.map((note)=> ({
             menuItem: note.name || `Untitled Note ${note.id}`, render: () => (
                 <Tab.Pane key={note.id}><NoteEditor  name={note.name || `Untitled Note ${note.id}`} note={note}/></Tab.Pane>
             )

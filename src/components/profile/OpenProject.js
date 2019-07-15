@@ -1,9 +1,7 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {connect} from "react-redux";
 import {Icon, Menu, Popup} from "semantic-ui-react";
 import {Link} from "react-router-dom";
-
-import DeleteProjectModal from './DeleteProjectModal'
 
 const OpenProject =  ({project: {id, title, description}, username, currentProject}) => {
 
